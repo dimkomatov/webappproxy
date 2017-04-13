@@ -3,14 +3,12 @@ package prox.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-import prox.model.Store;
-
-import java.util.List;
+import prox.model.Access;
 
 @Repository
-public interface StoreRepository extends JpaRepository<Store,Integer>{
+public interface AccessRepository extends JpaRepository<Access, Long> {
 
-   @Query("SELECT s FROM Store s")
-   List<Store> findAllIs();
+  @Query("SELECT a FROM Access a")
+  Access findAllIs();
 
 }
