@@ -1,7 +1,4 @@
-# Spring Boot Hello World Example with JSP
-
-## Guide
-https://hellokoding.com/spring-boot-hello-world-example-with-jsp/
+# WEB APP PROXY
 
 ## What you'll need
 - JDK 1.7 or later
@@ -12,4 +9,4 @@ https://hellokoding.com/spring-boot-hello-world-example-with-jsp/
 - Java
 
 ## Run
-`mvn spring-boot:run`
+TODO
