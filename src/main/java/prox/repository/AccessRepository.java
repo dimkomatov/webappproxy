@@ -5,10 +5,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import prox.model.Access;
 
+import java.util.List;
+
 @Repository
 public interface AccessRepository extends JpaRepository<Access, Long> {
 
   @Query("SELECT a FROM Access a")
-  Access findAllIs();
+  List<Access> findAllIs();
 
 }

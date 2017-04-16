@@ -101,7 +101,7 @@
             <br>
                         <br>
             <div class="form-actions">
-                <button type="submit" class="btn">Авторизоваться</button>
+                <button type="submit" class="btn">Login</button>
             </div>
         </fieldset>
     </form>

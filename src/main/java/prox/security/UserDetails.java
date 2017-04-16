@@ -5,9 +5,7 @@ import org.springframework.security.core.userdetails.User;
 
 import java.util.Collection;
 
-/**
- * Created by Gumi on 03.12.2016.
- */
+
 public class UserDetails extends User {
 
     private boolean passwordUpdated;

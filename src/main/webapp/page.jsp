@@ -96,136 +96,17 @@
      <div class="cbm_wrap ">
 <div tiles:fragment="content">
 
-    <form name="f2" th:action="@{/page}" method="post">
-        <fieldset>
-            <input type="text" style="display: none;" id="mlSt" name="action" value="findMlSt"/>
-            <br>
-            <div class="form-actions">
-                <button type="submit" class="btn" >Показать самого старшего и самого младшего гражданина</button>
-            </div>
-                <c:if test="${not empty mlSt}">
-                    <ul>
-                        <c:forEach var="mlStValue" items="${mlSt}">
-                            <li>${mlStValue}</li>
-                        </c:forEach>
-                    </ul>
-                </c:if>
-        </fieldset>
-    </form>
-
     <form name="f4" th:action="@{/page}" method="post">
-        <fieldset>
-            <form:select name="voteId"  path="votes">
-                <form:option value="0" label="Выбор"/>
-                <form:options items="${voteList}" />
-            </form:select>
             <br>
-            <input type="text" style="display: none;" id="showByVote" name="action" value="getByVote"/>
+            <input type="text" style="display: none;" id="findAll" name="action" value="findAllAccess"/>
             <br>
             <div class="form-actions">
-                <button type="submit" class="btn" >Показать имеющих право голоса по адресу и дате выборов</button>
+                <button type="submit" class="btn" >Show all</button>
             </div>
-
-                <c:if test="${not empty peopleByVote}">
+                <c:if test="${not empty allAccess}">
                     <ul>
-                        <c:forEach var="personValue" items="${peopleByVote}">
-                            <li>${personValue}</li>
-                        </c:forEach>
-                    </ul>
-                </c:if>
-        </fieldset>
-    </form>
-
-
-
-    <form name="f5" th:action="@{/page}" method="post">
-        <fieldset>
-            <label for="voteDateTime">Дата выборов  </label>
-            <input type="text" id="voteDateTime" name="voteDateTime"/>
-            <br>
-            <input type="text" style="display: none;" id="showByDate" name="action" value="getByDate"/>
-            <br>
-            <div class="form-actions">
-                <button type="submit" class="btn">Показать имеющих право голоса по дате выборов</button>
-            </div>
-                <c:if test="${not empty peopleByDate}">
-                    <ul>
-                        <c:forEach var="personValue" items="${peopleByDate}">
-                            <li>${personValue}</li>
-                        </c:forEach>
-                    </ul>
-                </c:if>
-        </fieldset>
-    </form>
-
-    <form name="f" th:action="@{/page}" method="post">
-        <fieldset>
-            <input type="text" style="display: none;" id="showNameSakes" name="action" value="findNamesakes"/>
-            <br>
-            <div class="form-actions">
-                <button type="submit" class="btn" >Показать однофамильцев</button>
-            </div>
-                <c:if test="${not empty lists}">
-                    <ul>
-                        <c:forEach var="listValue" items="${lists}">
-                            <li>${listValue}</li>
-                        </c:forEach>
-                    </ul>
-                </c:if>
-        </fieldset>
-    </form>
-
-    <form name="f2" th:action="@{/page}" method="post">
-        <fieldset>
-            <input type="text" style="display: none;" id="showVoted" name="action" value="findVoted"/>
-            <br>
-            <div class="form-actions">
-                <button type="submit" class="btn" >Показать принимавших участие в выборах</button>
-            </div>
-                <c:if test="${not empty voted}">
-                    <ul>
-                        <c:forEach var="votedValue" items="${voted}">
-                            <li>${votedValue}</li>
-                        </c:forEach>
-                    </ul>
-                </c:if>
-        </fieldset>
-    </form>
-
-    <form name="f3" th:action="@{/page}" method="post">
-        <fieldset>
-            <input type="text" style="display: none;" id="showUnVoted" name="action" value="findUnVoted"/>
-            <br>
-            <div class="form-actions">
-                <button type="submit" class="btn" >Показать не принимавших участие в выборах</button>
-            </div>
-                <c:if test="${not empty unvoted}">
-                    <ul>
-                        <c:forEach var="unvotedValue" items="${unvoted}">
-                            <li>${unvotedValue}</li>
-                        </c:forEach>
-                    </ul>
-                </c:if>
-        </fieldset>
-    </form>
-
-
-
-
-    <form name="f5" th:action="@{/page}" method="post">
-        <fieldset>
-            <label for="voteAddress">Адрес выборов  </label>
-            <input type="text" id="voteAddress" name="voteAddress"/>
-            <br>
-            <input type="text" style="display: none;" id="showByAddress" name="action" value="getByAddress"/>
-            <br>
-            <div class="form-actions">
-                <button type="submit" class="btn">Показать имеющих право голоса по адресу на текущую дату</button>
-            </div>
-                <c:if test="${not empty peopleByAddress}">
-                    <ul>
-                        <c:forEach var="personValue" items="${peopleByAddress}">
-                            <li>${personValue}</li>
+                        <c:forEach var="accessValue" items="${allAccess}">
+                            <li>${accessValue}</li>
                         </c:forEach>
                     </ul>
                 </c:if>
