@@ -59,7 +59,16 @@ public class HelloController {
     }
 
 
-    @RequestMapping("/login")
+    @RequestMapping("/admin")
+    public Model hello2(Model model,
+                        @RequestParam(value="action", required=false) String action) {
+
+//        model.addAttribute("personVote",new String());
+
+        return model;
+    }
+
+        @RequestMapping("/login")
     public Model login(Model model, @RequestParam(value="name", required=false) String name) {
 
         return model;
