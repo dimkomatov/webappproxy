@@ -24,12 +24,6 @@ public class HelloController {
     @RequestMapping("/page")
     public Model hello(Model model,
                        @RequestParam(value="action", required=false) String action){
-
-//                       @RequestParam(value="voteId", required=false) Integer voteId,
-//                       @RequestParam(value="voteDateTime", required=false) String voteDateTime,
-//                       @RequestParam(value="voteAddress", required=false) String voteAddress)
-
-
         if (action == null)
             return model;
         if (action.equals("findAllAccess")) {
@@ -59,19 +53,16 @@ public class HelloController {
     }
 
 
-    @RequestMapping("/admin")
-    public Model hello2(Model model,
-                        @RequestParam(value="action", required=false) String action) {
+//    @RequestMapping("/admin")
+//    public Model hello2(Model model,
+//                        @RequestParam(value="action", required=false) String action) {
+//        return model;
+//    }
 
-//        model.addAttribute("personVote",new String());
-
-        return model;
-    }
-
-        @RequestMapping("/login")
-    public Model login(Model model, @RequestParam(value="name", required=false) String name) {
-
-        return model;
-    }
+//    @RequestMapping("/login")
+//    public Model login(Model model, @RequestParam(value="name", required=false) String name) {
+//
+//        return model;
+//    }
 
 }
