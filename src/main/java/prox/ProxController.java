@@ -21,10 +21,12 @@ public class ProxController {
     @Autowired
     private StoreRepository storeRepository;
 
-    @RequestMapping("/page")
+    @RequestMapping(value = "/page")
     public Model getForm(Model model, @RequestParam(value="action", required=false) String action) {
         if (action == null)
             return model;
+        Integer countAll = accessRepository.countAll();
+        model.addAttribute("countAll", countAll);
         if (action.equals("findAllAccess"))
         {
             List<Access> access = accessRepository.findAllIs();

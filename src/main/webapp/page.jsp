@@ -17,7 +17,7 @@
       ['Канада', 0.03]
     ]);
     var options = {
-     title: 'Статистика использования по странам',
+     title: '             Статистика использования по странам',
      is3D: true,
      pieResidueSliceLabel: 'Остальные'
     };
@@ -31,12 +31,12 @@
          function drawChart() {
           var data = google.visualization.arrayToDataTable([
            ['Ресурс', 'Количество запросов'],
-           ['youtube.com', 1034504],
-           ['vk.com', 5329847],
-           ['popt.su', 3382442]
+           ['youtube.com', ${countAll}],
+           ['vk.com', 53],
+           ['popt.su', 338]
           ]);
           var options = {
-           title: 'Наиболее посещаемые ресурсы',
+           title: '          Наиболее посещаемые ресурсы',
            hAxis: {title: 'URL ресурса'},
            vAxis: {title: 'Количество запросов'}
           };
@@ -48,13 +48,13 @@
 <body>
  <style>
    .block1 {
-    width: 485px;
+    width: 560px;
     height: 400px;
     padding: 5px;
     float: left;
    }
    .block2 {
-    width: 485px;
+    width: 560px;
     height: 400px;
     padding: 5px;
     float: right;
@@ -62,7 +62,7 @@
    }
   .wrapper_body {
       position: absolute;
-      padding: 30px 0;
+      padding: 3px 0;
       height: 100%;
       width: 100%;
       background: #DEF;
@@ -91,7 +91,7 @@
       margin: 30px auto;
       padding: 22px;
       position: relative;
-      width: 1000px;
+      width: 1150px;
       min-height:390px;
   }
   .cbm_wrap :before, .cbm_wrap :after {
@@ -145,14 +145,17 @@
   }
   </style>
 <div tiles:fragment="content">
-<h1 class="center">Proxy Server Statictic</h1>
   <div class="wrapper_body">
   <div class="cbm_wrap">
+  <h1 class="center">Proxy Server Statistic</h1>
+  <h2>Общее количество подключений к proxy-серверу: ${countAll}</h2>
+  <h2>Количество уникальных подключений к proxy-серверу: 341</h2>
   <div id="countryStatistic" class="block1"></div>
   <div id="URLstatistic" class="block2"></div>
   <br>
   <br>
-    <form name="f4" th:action="@{/page}" method="get">
+
+    <form name="f2" th:action="@{/page}" method="get">
             <br>
             <input type="text" style="display: none;" id="findAll" name="action" value="findAllAccess"/>
             <br>

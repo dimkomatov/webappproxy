@@ -13,4 +13,7 @@ public interface AccessRepository extends JpaRepository<Access, Long> {
   @Query("SELECT a FROM Access a")
   List<Access> findAllIs();
 
+  @Query("SELECT count(*) FROM Access a")
+  Integer countAll();
+
 }
