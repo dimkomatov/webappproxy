@@ -1,13 +1,7 @@
-<%@ page contentType="text/html; charset=UTF-8" %>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:tiles="http://www.thymeleaf.org">
-<head>
-    <title tiles:fragment="title">Авторизация</title>
-</head>
-<body>
 <style>
 .wrapper_body {
     position: absolute;
-    padding: 20px 0;
+    padding: 30px 0;
     height: 100%;
     width: 100%;
     background: #DEF;
@@ -33,21 +27,21 @@
     -moz-box-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
     -webkit-box-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
     box-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
-    margin: 20px auto;
-    padding: 12px;
+    margin: 30px auto;
+    padding: 22px;
     position: relative;
-    width: 500px;
-    min-height:100px;
+    width: 1000px;
+    min-height:390px;
 }
 .cbm_wrap :before, .cbm_wrap :after {
     background: none;
-    bottom: 12px;
+    bottom: 22px;
     -moz-box-shadow: 0 10px 12px rgba(0, 0, 0, 0.5);
     -webkit-box-shadow: 0 10px 12px rgba(0, 0, 0, 0.5);
     box-shadow: 0 10px 12px rgba(0, 0, 0, 0.5);
     content: '';
-    height: 10px;
-    left: 12px;
+    height: 20px;
+    left: 22px;
     position: absolute;
     width: 40%;
     z-index: -1;
@@ -64,10 +58,10 @@
 }
 .cbm_wrap img {
     width: 100%;
-    margin-top: 15px;
+    margin-top: 25px;
 }
 .cbm_wrap p{
-    margin-top: 15px !important;
+    margin-top: 25px !important;
     text-align: justify !important;
 }
 .cbm_wrap h1{
@@ -88,25 +82,25 @@
     text-align: center;
   }
 </style>
-<div class="wrapper_body">
-     <div class="cbm_wrap ">
-<div tiles:fragment="content">
-    <form name="f" th:action="@{/login}" method="post">
-        <fieldset>
-            <br>
-            <label for="username">Логин   </label>
-            <input type="text" id="username" name="username"/>
-            <label for="password">Пароль   </label>
-            <input type="password" id="password" name="password"/>
-            <br>
-                        <br>
-            <div class="form-actions">
-                <button type="submit" class="btn">Login</button>
-            </div>
-        </fieldset>
-    </form>
-</div>
-</div>
-</div>
-</body>
-</html>
+
+      <script>
+       google.load("visualization", "1", {packages:["corechart"]});
+       google.setOnLoadCallback(drawChart);
+       function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+         ['Страна', 'Процент'],
+         ['Россия',     50.09],
+         ['Китай', 20.95],
+         ['Канада',    10.93],
+         ['США', 10.03]
+         ['Нидерланды', 8.03]
+        ]);
+        var options = {
+         title: 'Статистика использования открытого proxy-сервера',
+         is3D: true,
+         pieResidueSliceLabel: 'Остальное'
+        };
+        var chart = new google.visualization.PieChart(document.getElementById('countryStatistic'));
+         chart.draw(data, options);
+       }
+      </script>

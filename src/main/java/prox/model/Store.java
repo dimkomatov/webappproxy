@@ -1,26 +1,24 @@
 package prox.model;
 
 import javax.persistence.Entity;
-import javax.persistence.Table;
 import java.util.Date;
 
 @Entity
-@Table(name = "Store")
 public class Store extends TransactionalEntity{
 
     private static final int serialVersionUID = 1;
 
     private Date time;
     private String action;
+    private String filenum;
     private String http_reply_code;
     private String http_date;
     private String http_last_modified;
     private String http_expires;
     private String http_content_type;
-    private String http_content_length;
     private Float size;
     private String method;
-    private String pkey;
+    private String url;
 
     public Store(){
     }
@@ -85,14 +83,6 @@ public class Store extends TransactionalEntity{
         this.http_content_type = http_content_type;
     }
 
-    public String getHttp_content_length() {
-        return http_content_length;
-    }
-
-    public void setHttp_content_length(String http_content_length) {
-        this.http_content_length = http_content_length;
-    }
-
     public Float getSize() {
         return size;
     }
@@ -109,11 +99,19 @@ public class Store extends TransactionalEntity{
         this.method = method;
     }
 
-    public String getPkey() {
-        return pkey;
+    public String getFilenum() {
+        return filenum;
     }
 
-    public void setPkey(String pkey) {
-        this.pkey = pkey;
+    public void setFilenum(String filenum) {
+        this.filenum = filenum;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 }

@@ -3,9 +3,8 @@ package prox;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import prox.model.Access;
 import prox.repository.AccessRepository;
 import prox.repository.StoreRepository;
@@ -22,18 +21,21 @@ public class ProxController {
     @Autowired
     private StoreRepository storeRepository;
 
-    @GetMapping("/greeting")
-    public String greetingForm(Model model) {
-        List<Access> access = accessRepository.findAll();
-        List<String> accessList = new ArrayList<>();
-
-        model.addAttribute("allAccess", accessList);
-        return "all";
+    @RequestMapping("/page")
+    public Model getForm(Model model, @RequestParam(value="action", required=false) String action) {
+        if (action == null)
+            return model;
+        if (action.equals("findAllAccess"))
+        {
+            List<Access> access = accessRepository.findAllIs();
+            List<String> accessList = new ArrayList<>();
+            for (Access p : access) {
+                accessList.add(p.getTime().toString() + " " + p.getElapse() + " " + p.getRemotehost() + " " + p.getCountry() +
+                        " " + p.getCity() + " " + p.getCode()+" "+p.getBytes()+" " + p.getMethod()+ " " + p.getUrl() + " " +
+                        p.getRfc931()+ " " + p.getHierarchy_peerhost()+" "+ p.getType());
+            }
+            model.addAttribute("allAccess", accessList);
+        }
+        return model;
     }
-
-    @PostMapping("/greeting")
-    public String greetingSubmit(@ModelAttribute Greeting greeting) {
-        return "result";
-    }
-
 }

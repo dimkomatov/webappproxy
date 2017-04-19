@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 public interface AccessRepository extends JpaRepository<Access, Long> {
 
-  @Query("SELECT count(*) FROM Access a")
+  @Query("SELECT a FROM Access a")
   List<Access> findAllIs();
 
 }
