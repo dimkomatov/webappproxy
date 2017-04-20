@@ -1,0 +1,13 @@
+ order by a.time desc"
+
+       <c:if test="${not empty remotehostUrl}">
+            <table>
+               <c:forEach var="remotehostUrl" items="${remotehostUrl}">
+               <tr>
+                   <td><%! remotehostUrl.getRemotehost() %></td><td><%! remotehostUrl.getUrl() %></td>
+               </tr>
+               </c:forEach>
+           </table>
+           </c:if>
+
+       <table>

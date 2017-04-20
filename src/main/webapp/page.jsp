@@ -154,7 +154,27 @@
   <div id="URLstatistic" class="block2"></div>
   <br>
   <br>
+    <%@page language="java" import="java.util.List" %>
+     <table>
+      <%
+      @Autowired
+      prox.repository.AccessRepository accessRepository;
 
+      List<prox.dto.RemotehostUrlAccess> remotehostUrl = accessRepository.findRemotehostUrl(/*countRhUrl*/);
+     	for (int i = 0; i < remotehostUrl.size(); i++) {
+      out.println(remotehostUrl.get(i).getRemotehost());
+      out.println(remotehostUrl.get(i).getUrl());
+      %>
+      <tr>
+      <td> <%=remotehostUrl.get(i).getRemotehost()%></td>
+      <td><%=remotehostUrl.get(i).getUrl()%> </td>
+      </tr>
+
+      <%
+      }
+      %>
+
+      </table>
     <form name="f2" th:action="@{/page}" method="get">
             <br>
             <input type="text" style="display: none;" id="findAll" name="action" value="findAllAccess"/>

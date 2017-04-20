@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import prox.dto.RemotehostUrlAccess;
 import prox.model.Access;
 import prox.repository.AccessRepository;
 import prox.repository.StoreRepository;
@@ -22,11 +23,14 @@ public class ProxController {
     private StoreRepository storeRepository;
 
     @RequestMapping(value = "/page")
-    public Model getForm(Model model, @RequestParam(value="action", required=false) String action) {
+    public Model getForm(Model model, @RequestParam(value="action", required=false) String action/*,
+                                      @RequestParam(value="countRhUrl", required=false) Integer countRhUrl*/) {
         if (action == null)
             return model;
         Integer countAll = accessRepository.countAll();
         model.addAttribute("countAll", countAll);
+        List<RemotehostUrlAccess> remotehostUrl = accessRepository.findRemotehostUrl(/*countRhUrl*/);
+        model.addAttribute("remotehostUrl", remotehostUrl);
         if (action.equals("findAllAccess"))
         {
             List<Access> access = accessRepository.findAllIs();

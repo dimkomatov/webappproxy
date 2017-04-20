@@ -3,6 +3,7 @@ package prox.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+import prox.dto.RemotehostUrlAccess;
 import prox.model.Access;
 
 import java.util.List;
@@ -15,5 +16,9 @@ public interface AccessRepository extends JpaRepository<Access, Long> {
 
   @Query("SELECT count(*) FROM Access a")
   Integer countAll();
+
+  @Query("SELECT a.remotehost,a.url FROM Access a")
+  List<RemotehostUrlAccess> findRemotehostUrl(/*@Param(value = "countRhUrl")Integer countRhUrl*/);
+
 
 }
