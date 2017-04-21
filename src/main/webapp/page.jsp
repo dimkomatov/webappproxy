@@ -2,6 +2,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ page contentType="text/html; charset=UTF-8" %>
+
 <head>
     <title tiles:fragment="title">Proxy Web App</title>
       <script src="https://www.google.com/jsapi"></script>
@@ -149,32 +150,22 @@
   <div class="cbm_wrap">
   <h1 class="center">Proxy Server Statistic</h1>
   <h2>Общее количество подключений к proxy-серверу: ${countAll}</h2>
-  <h2>Количество уникальных подключений к proxy-серверу: 341</h2>
+  <h2>Количество уникальных пользователей proxy-сервера: 341</h2>
   <div id="countryStatistic" class="block1"></div>
   <div id="URLstatistic" class="block2"></div>
   <br>
   <br>
-    <%@page language="java" import="java.util.List" %>
-     <table>
-      <%
-      @Autowired
-      prox.repository.AccessRepository accessRepository;
+       <c:if test="${not empty remotehostUrl}">
+            <table>
+               <c:forEach var="rhu" items="${remotehostUrl}">
+               <tr>
+                   <td>${rhu[0]}</td>
+                   <td>${rhu[1]}</td>
 
-      List<prox.dto.RemotehostUrlAccess> remotehostUrl = accessRepository.findRemotehostUrl(/*countRhUrl*/);
-     	for (int i = 0; i < remotehostUrl.size(); i++) {
-      out.println(remotehostUrl.get(i).getRemotehost());
-      out.println(remotehostUrl.get(i).getUrl());
-      %>
-      <tr>
-      <td> <%=remotehostUrl.get(i).getRemotehost()%></td>
-      <td><%=remotehostUrl.get(i).getUrl()%> </td>
-      </tr>
-
-      <%
-      }
-      %>
-
-      </table>
+               </tr>
+               </c:forEach>
+           </table>
+           </c:if>
     <form name="f2" th:action="@{/page}" method="get">
             <br>
             <input type="text" style="display: none;" id="findAll" name="action" value="findAllAccess"/>

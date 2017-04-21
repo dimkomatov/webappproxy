@@ -26,4 +26,7 @@ public class RemotehostUrlAccess {
         this.remotehost = remotehost;
         this.url = url;
     }
+
+    public RemotehostUrlAccess() {
+    }
 }
