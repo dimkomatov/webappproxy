@@ -28,8 +28,8 @@
   </script>
         <script>
          google.load("visualization", "1", {packages:["corechart"]});
-         google.setOnLoadCallback(drawChart);
-         function drawChart() {
+         google.setOnLoadCallback(drawChart1);
+         function drawChart1() {
           var data = google.visualization.arrayToDataTable([
            ['Ресурс', 'Количество запросов'],
            ['youtube.com', ${countAll}],
@@ -151,21 +151,41 @@
   <h1 class="center">Proxy Server Statistic</h1>
   <h2>Общее количество подключений к proxy-серверу: ${countAll}</h2>
   <h2>Количество уникальных пользователей proxy-сервера: 341</h2>
+  <h2>Среднее количество байт, переданное за сессию: ${avgBytes}</h2>
   <div id="countryStatistic" class="block1"></div>
   <div id="URLstatistic" class="block2"></div>
   <br>
-  <br>
+    <h2>N последних запросов</h2>
        <c:if test="${not empty remotehostUrl}">
-            <table>
+            <table bordercolor="black" border="1" align="center">
+              <tr>
+                  <td align="center">Клиентский IP</td>
+                  <td align="center">URL ресурса</td>
+              </tr>
                <c:forEach var="rhu" items="${remotehostUrl}">
                <tr>
-                   <td>${rhu[0]}</td>
-                   <td>${rhu[1]}</td>
-
+                   <td align="center">${rhu[0]}</td>
+                   <td align="center">${rhu[1]}</td>
                </tr>
                </c:forEach>
            </table>
            </c:if>
+  <br>
+     <h2>Среднее количство байт переданное клиентами</h2>
+           <c:if test="${not empty remotehostUrl}">
+                <table bordercolor="black" border="1" align="center">
+                  <tr>
+                      <td align="center">Клиентский IP</td>
+                      <td align="center">URL ресурса</td>
+                  </tr>
+                   <c:forEach var="rhu" items="${remotehostUrl}">
+                   <tr>
+                       <td align="center">${rhu[0]}</td>
+                       <td align="center">${rhu[1]}</td>
+                   </tr>
+                   </c:forEach>
+               </table>
+               </c:if>
     <form name="f2" th:action="@{/page}" method="get">
             <br>
             <input type="text" style="display: none;" id="findAll" name="action" value="findAllAccess"/>

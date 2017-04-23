@@ -29,6 +29,8 @@ public class ProxController {
             return model;
         Integer countAll = accessRepository.countAll();
         model.addAttribute("countAll", countAll);
+        Integer avgBytes = accessRepository.avgBytes();
+        model.addAttribute("avgBytes", avgBytes);
         List<RemotehostUrlAccess> remotehostUrl = accessRepository.findRemotehostUrl(10);
         model.addAttribute("remotehostUrl", remotehostUrl);
         if (action.equals("findAllAccess"))
