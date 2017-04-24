@@ -29,5 +29,5 @@ public interface AccessRepository extends JpaRepository<Access, Long> {
   @Query(nativeQuery = true, value="SELECT remotehost,avg(bytes) FROM Access where time between :date1 and :date2 group by remotehost " +
           "order by avg(bytes) desc limit :countRhBytes")
   List<RhBytes> findAvgRhBytes(@Param(value = "countRhBytes")Integer countRhBytes, @Param(value = "date1")Date date1,
-                               @Param(value = "date1")Date date2);
+                               @Param(value = "date2")Date date2);
 }

@@ -172,13 +172,26 @@
            </c:if>
   <br>
      <h2>Среднее количство байт переданное клиентами</h2>
-           <c:if test="${not empty remotehostUrl}">
+        <form name="f1" th:action="@{/page}" method="get">
+             <fieldset>
+                 <label for="countRhUrl">Количество</label>
+                 <input type="text" id="countRhUrl" name="countRhUrl"/>
+                 <label for="dateAvgRhBytes1">Дата c</label>
+                 <input type="text" id="dateAvgRhBytes1" name="dateAvgRhBytes1"/>
+                 <label for="dateAvgRhBytes2">Дата по</label>
+                 <input type="text" id="dateAvgRhBytes2" name="dateAvgRhBytes2"/>
+                 <input type="text" style="display: none;" id="findAvgRhBytes" name="action" value="findAvgRhBytes"/>
+                 <br>
+                 <div class="form-actions">
+                     <button type="submit" class="btn">Показать</button>
+                 </div>
+           <c:if test="${not empty findAvgRhBytes}">
                 <table bordercolor="black" border="1" align="center">
                   <tr>
                       <td align="center">Клиентский IP</td>
-                      <td align="center">URL ресурса</td>
+                      <td align="center">Среденее количество байт</td>
                   </tr>
-                   <c:forEach var="rhu" items="${remotehostUrl}">
+                   <c:forEach var="rhu" items="${findAvgRhBytes}">
                    <tr>
                        <td align="center">${rhu[0]}</td>
                        <td align="center">${rhu[1]}</td>
@@ -186,8 +199,10 @@
                    </c:forEach>
                </table>
                </c:if>
+               </fieldset>
+                   </form>
+    <br>
     <form name="f2" th:action="@{/page}" method="get">
-            <br>
             <input type="text" style="display: none;" id="findAll" name="action" value="findAllAccess"/>
             <br>
             <div class="form-actions">
