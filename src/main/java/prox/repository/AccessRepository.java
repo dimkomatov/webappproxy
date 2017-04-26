@@ -30,4 +30,8 @@ public interface AccessRepository extends JpaRepository<Access, Long> {
           "order by avg(bytes) desc limit :countRhBytes")
   List<RhBytes> findAvgRhBytes(@Param(value = "countRhBytes")Integer countRhBytes, @Param(value = "date1")Date date1,
                                @Param(value = "date2")Date date2);
+
+  @Query(nativeQuery = true, value="SELECT url,count(url) FROM Access where time between :date1 and :date2 group by url" +
+          "order by count(url) desc limit 5")
+  Integer findPopularUrl(@Param(value = "date1")Date date1, @Param(value = "date2")Date date2);
 }

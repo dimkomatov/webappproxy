@@ -13,6 +13,8 @@ public class Access extends TransactionalEntity {
     private String country;
     private String city;
     private String code;
+    private Float latitude;
+    private Float longitude;
     private Integer bytes;
     private String method;
     private String url;
@@ -69,6 +71,22 @@ public class Access extends TransactionalEntity {
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+    public Float getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Float latitude) {
+        this.latitude = latitude;
+    }
+
+    public Float getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Float longitude) {
+        this.longitude = longitude;
     }
 
     public Integer getBytes() {
