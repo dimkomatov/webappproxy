@@ -50,29 +50,29 @@ public class ProxController {
         Integer avgBytes = accessRepository.avgBytes();
         model.addAttribute("avgBytes", avgBytes);
 
-        if (action.equals("cityCount")) {
             try {
-                date1 = formatter.parse(dateCountCity1);
-                date2 = formatter.parse(dateCountCity2);
+                //date1 = formatter.parse(dateCountCity1);
+               // date2 = formatter.parse(dateCountCity2);
+                date1 = formatter.parse(dateAvgRhBytes1);
+                date2 = formatter.parse(dateAvgRhBytes2);
 
             } catch (ParseException e) {
                 System.out.println("Error");
             }
             List<CityCount> cityCount = accessRepository.findCityCount(date1,date2);
             model.addAttribute("cityCount", cityCount);
-        }
 
-        if (action.equals("countryCount")) {
             try {
-                date1 = formatter.parse(dateCountCountry1);
-                date2 = formatter.parse(dateCountCountry2);
+               // date1 = formatter.parse(dateCountCountry1);
+               // date2 = formatter.parse(dateCountCountry2);
+                date1 = formatter.parse(dateAvgRhBytes1);
+                date2 = formatter.parse(dateAvgRhBytes2);
 
             } catch (ParseException e) {
                 System.out.println("Error");
             }
             List<CountryCount> countryCount = accessRepository.findCountryCount(date1,date2);
             model.addAttribute("countryCount", countryCount);
-        }
 
         if (action.equals("findAvgRhBytes")) {
             try {

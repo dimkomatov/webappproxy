@@ -11,11 +11,8 @@
    google.setOnLoadCallback(drawChart);
    function drawChart() {
     var data = google.visualization.arrayToDataTable([
-      ['Страна', 'Процент'],
-      ['Китай',     78.09],
-      ['Россия', 20.95],
-      ['Нидерланды',    0.93],
-      ['Канада', 0.03]
+      ['Страна', 'Процент']
+
     ]);
     var options = {
      title: '             Статистика использования по странам',
@@ -31,10 +28,10 @@
          google.setOnLoadCallback(drawChart1);
          function drawChart1() {
           var data = google.visualization.arrayToDataTable([
-           ['Ресурс', 'Количество запросов'],
-           ['youtube.com', ${countAll}],
-           ['vk.com', 53],
-           ['popt.su', 338]
+           ['Ресурс', 'Количество запросов']
+               <c:forEach var="cCount" items="${countryCount}">
+                ,['${cCount[0]}', ${cCount[1]}]
+               </c:forEach>
           ]);
           var options = {
            title: '          Наиболее посещаемые ресурсы',
