@@ -6,36 +6,19 @@
 <head>
     <title tiles:fragment="title">Proxy Web App</title>
       <script src="https://www.google.com/jsapi"></script>
-<script>
-   google.load("visualization", "1", {packages:["corechart"]});
-   google.setOnLoadCallback(drawChart);
-   function drawChart() {
-    var data = google.visualization.arrayToDataTable([
-      ['Страна', 'Процент']
-
-    ]);
-    var options = {
-     title: '             Статистика использования по странам',
-     is3D: true,
-     pieResidueSliceLabel: 'Остальные'
-    };
-    var chart = new google.visualization.PieChart(document.getElementById('countryStatistic'));
-     chart.draw(data, options);
-   }
-  </script>
         <script>
          google.load("visualization", "1", {packages:["corechart"]});
          google.setOnLoadCallback(drawChart1);
          function drawChart1() {
           var data = google.visualization.arrayToDataTable([
-           ['Ресурс', 'Количество запросов']
+           ['Страна', 'Количество запросов']
                <c:forEach var="cCount" items="${countryCount}">
                 ,['${cCount[0]}', ${cCount[1]}]
                </c:forEach>
           ]);
           var options = {
-           title: '          Наиболее посещаемые ресурсы',
-           hAxis: {title: 'URL ресурса'},
+           title: 'Статистика по странам',
+           hAxis: {title: 'Страна'},
            vAxis: {title: 'Количество запросов'}
           };
           var chart = new google.visualization.ColumnChart(document.getElementById('URLstatistic'));
@@ -199,22 +182,6 @@
                </fieldset>
                    </form>
     <br>
-    <form name="f2" th:action="@{/page}" method="get">
-            <input type="text" style="display: none;" id="findAll" name="action" value="findAllAccess"/>
-            <br>
-            <div class="form-actions">
-                <button type="submit" class="btn" >Show all</button>
-            </div>
-            <br>
-                <c:if test="${not empty allAccess}">
-                    <ul>
-                        <c:forEach var="accessValue" items="${allAccess}">
-                            <li>${accessValue}</li>
-                        </c:forEach>
-                    </ul>
-                </c:if>
-        </fieldset>
-    </form>
 </div>
 </div>
 </div>
