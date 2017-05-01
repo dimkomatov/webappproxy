@@ -56,14 +56,19 @@ if __name__ == "__main__":
 		response = reader.city(line[2])
 		entry.country = response.country.name
 		entry.city = response.city.name
-		entry.latitude = response.location.latitude
-		entry.longitude = response.location.longitude
 		entry.code = line[3]
 		entry.bytes = line[4]
 		entry.method = line[5]
 		entry.url = line[6]
+		u_2 = line[6].split("/")
+		if h_p_3[0]!="http:":
+			entry.url_0 = line[6]
+		else:
+			entry.url_0 = u_0[2]
 		entry.rfc931 = line[7]
 		entry.hierarchy_peerhost = line[8]
+		h_p_1 = line[8].split("/")
+		entry.hierarchy_peerhost_1 = h_p_1[1]
 		entry.type = line[9]
 
 		try:

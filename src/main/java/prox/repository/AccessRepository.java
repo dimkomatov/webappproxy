@@ -16,18 +16,23 @@ import java.util.List;
 @Repository
 public interface AccessRepository extends JpaRepository<Access, Long> {
 
+  /**Общее количество подключений*/
   @Query("SELECT count(*) FROM Access a")
   Integer countAll();
 
+  /**Общее количество уникальных подключений*/
   @Query("SELECT count(distinct remotehost) FROM Access a")
   Integer countDistinct();
 
+  /**Последние запросы с IP на URL*/
   @Query(nativeQuery = true, value="SELECT remotehost,url FROM Access order by time desc limit :countRhUrl")
   List<RemotehostUrlAccess> findRemotehostUrl(@Param(value = "countRhUrl")Integer countRhUrl);
 
+  /**Среднее количество передаваемых байт*/
   @Query(nativeQuery = true, value="SELECT avg(bytes) FROM Access")
   Integer avgBytes();
 
+  /**Среднее количество передаваемых байт отдельным IP*/
   @Query(nativeQuery = true, value="SELECT remotehost,avg(bytes) FROM Access where time between " +
           "coalesce(:date1,'2016-01-01 00:00:01') and coalesce(:date2,'2017-12-12 00:00:01') group by remotehost " +
           "order by avg(bytes) desc limit :countRhBytes")
