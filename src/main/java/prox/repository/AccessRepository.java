@@ -16,11 +16,11 @@ import java.util.List;
 @Repository
 public interface AccessRepository extends JpaRepository<Access, Long> {
 
-  @Query("SELECT a FROM Access a")
-  List<Access> findAllIs();
-
   @Query("SELECT count(*) FROM Access a")
   Integer countAll();
+
+  @Query("SELECT count(distinct remotehost) FROM Access a")
+  Integer countDistinct();
 
   @Query(nativeQuery = true, value="SELECT remotehost,url FROM Access order by time desc limit :countRhUrl")
   List<RemotehostUrlAccess> findRemotehostUrl(@Param(value = "countRhUrl")Integer countRhUrl);
@@ -28,7 +28,8 @@ public interface AccessRepository extends JpaRepository<Access, Long> {
   @Query(nativeQuery = true, value="SELECT avg(bytes) FROM Access")
   Integer avgBytes();
 
-  @Query(nativeQuery = true, value="SELECT remotehost,avg(bytes) FROM Access where time between :date1 and :date2 group by remotehost " +
+  @Query(nativeQuery = true, value="SELECT remotehost,avg(bytes) FROM Access where time between " +
+          "coalesce(:date1,'2016-01-01 00:00:01') and coalesce(:date2,'2017-12-12 00:00:01') group by remotehost " +
           "order by avg(bytes) desc limit :countRhBytes")
   List<RhBytes> findAvgRhBytes(@Param(value = "countRhBytes")Integer countRhBytes, @Param(value = "date1")Date date1,
                                @Param(value = "date2")Date date2);
@@ -38,10 +39,12 @@ public interface AccessRepository extends JpaRepository<Access, Long> {
 //  UrlCount findPopularUrl(@Param(value = "date1")Date date1, @Param(value = "date2")Date date2);
 
 
-  @Query(nativeQuery = true, value="SELECT country,count(country) FROM Access group by country " +
+  @Query(nativeQuery = true, value="SELECT country,count(country) FROM Access  where time between coalesce(:date1,'2016-01-01 00:00:01') " +
+          "and coalesce(:date2,'2016-01-01 00:00:01') group by country " +
           "order by count(country) desc limit 4")
-  List<CountryCount> findCountryCount(/*@Param(value = "date1")Date date1, @Param(value = "date2")Date date2 where time between :date1 and :date2 */);
+  List<CountryCount> findCountryCount(@Param(value = "date1")Date date1, @Param(value = "date2")Date date2);
 
-  @Query(nativeQuery = true, value="SELECT city,count(city) FROM Access group by city order by count(city) desc limit 4")
-  List<CityCount> findCityCount(/*@Param(value = "date1")Date date1, @Param(value = "date2")Date date2*/);
+  @Query(nativeQuery = true, value="SELECT city,count(city) FROM Access  where time between" +
+          " coalesce(:date1,'2016-01-01 00:00:01') and coalesce(:date2,'2016-01-01 00:00:01') group by city order by count(city) desc limit 4")
+  List<CityCount> findCityCount(@Param(value = "date1")Date date1, @Param(value = "date2")Date date2);
 }

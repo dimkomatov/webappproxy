@@ -33,10 +33,8 @@ public class ProxController {
     @RequestMapping(value = "/page")
     public Model getForm(Model model, @RequestParam(value="action", required=false) String action,
                                       @RequestParam(value="countRhUrl", required=false) Integer countRhUrl,
-                                      @RequestParam(value="dateCountCity1", required=false) String dateCountCity1,
-                                      @RequestParam(value="dateCountCity2", required=false) String dateCountCity2,
-                                      @RequestParam(value="dateCountCountry1", required=false) String dateCountCountry1,
-                                      @RequestParam(value="dateCountCountry2", required=false) String dateCountCountry2,
+                                      @RequestParam(value="dateCountryCity1", required=false) String dateCountryCity1,
+                                      @RequestParam(value="dateCountryCity2", required=false) String dateCountryCity2,
                                       @RequestParam(value="dateAvgRhBytes1", required=false) String dateAvgRhBytes1,
                                       @RequestParam(value="dateAvgRhBytes2", required=false) String dateAvgRhBytes2) throws ParseException {
         if (action == null)
@@ -45,15 +43,27 @@ public class ProxController {
         Integer countAll = accessRepository.countAll();
         model.addAttribute("countAll", countAll);
 
+        Integer countDistinct = accessRepository.countDistinct();
+        model.addAttribute("countDistinct", countDistinct);
+
         Integer avgBytes = accessRepository.avgBytes();
         model.addAttribute("avgBytes", avgBytes);
 
-            List<CityCount> cityCount = accessRepository.findCityCount();
+
+        if (action.equals("cityAndCountry")) {
+            try {
+                date1 = formatter.parse(dateCountryCity1);
+                date2 = formatter.parse(dateCountryCity2);
+
+            } catch (ParseException e) {
+                System.out.println("Error");
+            }
+            List<CityCount> cityCount = accessRepository.findCityCount(date1, date2);
             model.addAttribute("cityCount", cityCount);
 
-
-            List<CountryCount> countryCount = accessRepository.findCountryCount();
+            List<CountryCount> countryCount = accessRepository.findCountryCount(date1, date2);
             model.addAttribute("countryCount", countryCount);
+        }
 
         if (action.equals("findAvgRhBytes")) {
             try {

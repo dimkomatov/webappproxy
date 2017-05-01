@@ -21,10 +21,30 @@
            hAxis: {title: 'Страна'},
            vAxis: {title: 'Количество запросов'}
           };
-          var chart = new google.visualization.ColumnChart(document.getElementById('URLstatistic'));
+          var chart = new google.visualization.ColumnChart(document.getElementById('countryStatistic'));
           chart.draw(data, options);
          }
         </script>
+        <script>
+           google.load("visualization", "1", {packages:["corechart"]});
+           google.setOnLoadCallback(drawChart1);
+           function drawChart1() {
+            var data = google.visualization.arrayToDataTable([
+             ['Город', 'Количество запросов']
+                 <c:forEach var="ciCount" items="${cityCount}">
+                  ,['${ciCount[0]}', ${ciCount[1]}]
+                 </c:forEach>
+            ]);
+            var options = {
+             title: 'Статистика по городам',
+             hAxis: {title: 'Город'},
+             vAxis: {title: 'Количество запросов'}
+            };
+            var chart = new google.visualization.ColumnChart(document.getElementById('cityStatistic'));
+            chart.draw(data, options);
+           }
+        </script>
+         <link href="<c:url value="/resources/css/main.css" />" rel="stylesheet">
 </head>
 <body>
  <style>
@@ -129,11 +149,25 @@
   <div class="wrapper_body">
   <div class="cbm_wrap">
   <h1 class="center">Proxy Server Statistic</h1>
+
   <h2>Общее количество подключений к proxy-серверу: ${countAll}</h2>
-  <h2>Количество уникальных пользователей proxy-сервера: 341</h2>
+  <h2>Количество уникальных пользователей proxy-сервера: ${countDistinct}</h2>
   <h2>Среднее количество байт, переданное за сессию: ${avgBytes}</h2>
+
+  <form name="f0" th:action="@{/page}" method="get">
   <div id="countryStatistic" class="block1"></div>
-  <div id="URLstatistic" class="block2"></div>
+  <div id="cityStatistic" class="block2"></div>
+  <label for="dateCountryCity1">Дата c</label>
+  <input type="text" id="dateCountryCity1" name="dateCountryCity1"/>
+  <label for="dateCountryCity2">Дата по</label>
+  <input type="text" id="dateCountryCity2" name="dateCountryCity2"/>
+  <input type="text" style="display: none;" id="cityAndCountry" name="action" value="cityAndCountry"/>
+  <br> <br>
+  <div class="form-actions">
+      <button type="submit" class="btn">Показать</button>
+  </div>
+  </form>
+
   <br>
     <h2>N последних запросов</h2>
        <c:if test="${not empty remotehostUrl}">
