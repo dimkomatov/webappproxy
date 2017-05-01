@@ -53,7 +53,11 @@ if __name__ == "__main__":
 		entry.time = datetime.datetime.fromtimestamp(int(line[0]))
 		entry.elapse = line[1]
 		entry.remotehost = line[2]
-		response = reader.city(line[2])
+		try:
+			response = reader.city(line[2])
+		except ValueError:
+			entry.country = null
+			entry.city = null
 		entry.country = response.country.name
 		entry.city = response.city.name
 		entry.code = line[3]
