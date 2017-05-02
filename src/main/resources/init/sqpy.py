@@ -29,8 +29,10 @@ class Access(CustomModel):
 	bytes = IntegerField()
 	method = CharField()
 	url = CharField()
+	url_0 = CharField()
 	rfc931 = CharField()
 	hierarchy_peerhost = CharField()
+	hierarchy_peerhost_1 = CharField()
 	type = CharField()
 
 # pick the data from stdin and build two lists: raw and log,
@@ -53,25 +55,29 @@ if __name__ == "__main__":
 		entry.time = datetime.datetime.fromtimestamp(int(line[0]))
 		entry.elapse = line[1]
 		entry.remotehost = line[2]
+		response = None
+		entry.country = None
+		entry.city = None
 		try:
 			response = reader.city(line[2])
+			entry.country = response.country.name
+			entry.city = response.city.name
 		except ValueError:
-			entry.country = null
-			entry.city = null
-		entry.country = response.country.name
-		entry.city = response.city.name
+			pass
 		entry.code = line[3]
 		entry.bytes = line[4]
 		entry.method = line[5]
 		entry.url = line[6]
-		u_2 = line[6].split("/")
-		if h_p_3[0]!="http:":
+		u_00 = line[6]
+		u_0 = u_00.split("/")
+		if u_0[0]!="http:":
 			entry.url_0 = line[6]
 		else:
 			entry.url_0 = u_0[2]
 		entry.rfc931 = line[7]
 		entry.hierarchy_peerhost = line[8]
-		h_p_1 = line[8].split("/")
+		h_p_11 = line[8]
+		h_p_1 = h_p_11.split("/")
 		entry.hierarchy_peerhost_1 = h_p_1[1]
 		entry.type = line[9]
 
