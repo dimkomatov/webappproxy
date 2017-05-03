@@ -16,8 +16,10 @@ public class Access extends TransactionalEntity {
     private Integer bytes;
     private String method;
     private String url;
+    private String url_0;
     private String rfc931;
     private String hierarchy_peerhost;
+    private String hierarchy_peerhost_1;
     private String type;
 
     public Access() {
@@ -89,6 +91,22 @@ public class Access extends TransactionalEntity {
 
     public String getUrl() {
         return url;
+    }
+
+    public String getUrl_0() {
+        return url_0;
+    }
+
+    public void setUrl_0(String url_0) {
+        this.url_0 = url_0;
+    }
+
+    public String getHierarchy_peerhost_1() {
+        return hierarchy_peerhost_1;
+    }
+
+    public void setHierarchy_peerhost_1(String hierarchy_peerhost_1) {
+        this.hierarchy_peerhost_1 = hierarchy_peerhost_1;
     }
 
     public void setUrl(String url) {

@@ -4,10 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import prox.dto.CityCount;
-import prox.dto.CountryCount;
-import prox.dto.RemotehostUrlAccess;
-import prox.dto.RhBytes;
+import prox.dto.*;
 import prox.model.Access;
 
 import java.util.Date;
@@ -19,6 +16,14 @@ public interface AccessRepository extends JpaRepository<Access, Long> {
   /**Общее количество подключений*/
   @Query("SELECT count(*) FROM Access a")
   Integer countAll();
+
+  /**Все страны*/
+  @Query("SELECT distinct country FROM Access a")
+  List<String> findAllCountry();
+
+  /**Все города*/
+  @Query("SELECT distinct city FROM Access a")
+  List<String> findAllCity();
 
   /**Общее количество уникальных подключений*/
   @Query("SELECT count(distinct remotehost) FROM Access a")
@@ -39,17 +44,26 @@ public interface AccessRepository extends JpaRepository<Access, Long> {
   List<RhBytes> findAvgRhBytes(@Param(value = "countRhBytes")Integer countRhBytes, @Param(value = "date1")Date date1,
                                @Param(value = "date2")Date date2);
 
-//  @Query(nativeQuery = true, value="SELECT url,count(url) FROM Access where time between :date1 and :date2 group by url" +
-//          "order by count(url) desc limit 5")
-//  UrlCount findPopularUrl(@Param(value = "date1")Date date1, @Param(value = "date2")Date date2);
-
-
+  /**Количество запросов по странам*/
   @Query(nativeQuery = true, value="SELECT country,count(country) FROM Access  where time between coalesce(:date1,'2016-01-01 00:00:01') " +
-          "and coalesce(:date2,'2016-01-01 00:00:01') group by country " +
+          "and coalesce(:date2,'2017-12-12 00:00:01') group by country " +
           "order by count(country) desc limit 4")
   List<CountryCount> findCountryCount(@Param(value = "date1")Date date1, @Param(value = "date2")Date date2);
 
+  /**Количество запросов по городам*/
   @Query(nativeQuery = true, value="SELECT city,count(city) FROM Access  where time between" +
-          " coalesce(:date1,'2016-01-01 00:00:01') and coalesce(:date2,'2016-01-01 00:00:01') group by city order by count(city) desc limit 4")
+          " coalesce(:date1,'2016-01-01 00:00:01') and coalesce(:date2,'2017-12-12 00:00:01') group by city order by count(city) desc limit 4")
   List<CityCount> findCityCount(@Param(value = "date1")Date date1, @Param(value = "date2")Date date2);
+
+  /**Самые популярные URL по странам*/
+  @Query(nativeQuery = true, value="SELECT url_0,count(url_0) FROM Access where country=coalesce(:countryUrl,'Russia') and time between" +
+          " coalesce(:date1,'2016-01-01 00:00:01') and coalesce(:date2,'2017-12-12 00:00:01') group by url_0" +
+          "order by count(url_0) desc limit 4")
+  List<UrlCount> findUrlCountry(@Param(value = "countryUrl")String cityUrl, @Param(value = "date1")Date date1, @Param(value = "date2")Date date2);
+
+  /**Самые популярные URL по городам*/
+  @Query(nativeQuery = true, value="SELECT url_0,count(url_0) FROM Access where city=coalesce(:cityUrl,'Klimovsk') and time between" +
+          " coalesce(:date1,'2016-01-01 00:00:01') and coalesce(:date2,'2017-12-12 00:00:01') group by url_0" +
+          "order by count(url_0) desc limit 4")
+  List<UrlCount> findUrlCity(@Param(value = "cityUrl")String cityUrl, @Param(value = "date1")Date date1, @Param(value = "date2")Date date2);
 }

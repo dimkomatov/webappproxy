@@ -5,10 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import prox.dto.CityCount;
-import prox.dto.CountryCount;
-import prox.dto.RemotehostUrlAccess;
-import prox.dto.RhBytes;
+import prox.dto.*;
 import prox.repository.AccessRepository;
 import prox.repository.StoreRepository;
 
@@ -35,6 +32,10 @@ public class ProxController {
                                       @RequestParam(value="countRhUrl", required=false) Integer countRhUrl,
                                       @RequestParam(value="dateCountryCity1", required=false) String dateCountryCity1,
                                       @RequestParam(value="dateCountryCity2", required=false) String dateCountryCity2,
+                                      @RequestParam(value="dateCountryCityUrl1", required=false) String dateCountryCityUrl1,
+                                      @RequestParam(value="dateCountryCityUrl2", required=false) String dateCountryCityUrl2,
+                                      @RequestParam(value="countryCoUrl", required=false) String countryCoUrl,
+                                      @RequestParam(value="cityCoUrl", required=false) String cityCoUrl,
                                       @RequestParam(value="dateAvgRhBytes1", required=false) String dateAvgRhBytes1,
                                       @RequestParam(value="dateAvgRhBytes2", required=false) String dateAvgRhBytes2) throws ParseException {
         if (action == null)
@@ -63,6 +64,27 @@ public class ProxController {
 
             List<CountryCount> countryCount = accessRepository.findCountryCount(date1, date2);
             model.addAttribute("countryCount", countryCount);
+        }
+
+        List<String> findAllCountry = accessRepository.findAllCountry();
+        model.addAttribute("findAllCountry", findAllCountry);
+
+        List<String> findAllCity = accessRepository.findAllCity();
+        model.addAttribute("findAllCity", findAllCity);
+
+        if (action.equals("cityAndCountryUrl")) {
+            try {
+                date1 = formatter.parse(dateCountryCityUrl1);
+                date2 = formatter.parse(dateCountryCityUrl2);
+
+            } catch (ParseException e) {
+                System.out.println("Error");
+            }
+            List<UrlCount> countryUrl = accessRepository.findUrlCountry(countryCoUrl,date1, date2);
+            model.addAttribute("countryUrl", countryUrl);
+
+            List<UrlCount> cityUrl = accessRepository.findUrlCity(cityCoUrl,date1, date2);
+            model.addAttribute("cityUrl", cityUrl);
         }
 
         if (action.equals("findAvgRhBytes")) {

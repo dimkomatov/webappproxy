@@ -2,10 +2,10 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ page contentType="text/html; charset=UTF-8" %>
-
 <head>
     <title tiles:fragment="title">Proxy Web App</title>
       <script src="https://www.google.com/jsapi"></script>
+
         <script>
          google.load("visualization", "1", {packages:["corechart"]});
          google.setOnLoadCallback(drawChart1);
@@ -44,7 +44,46 @@
             chart.draw(data, options);
            }
         </script>
-         <link href="<c:url value="/resources/css/main.css" />" rel="stylesheet">
+
+        <script>
+           google.load("visualization", "1", {packages:["corechart"]});
+           google.setOnLoadCallback(drawChart1);
+           function drawChart1() {
+            var data = google.visualization.arrayToDataTable([
+             ['URL', 'Количество запросов']
+                 <c:forEach var="coUrl" items="${countryUrl}">
+                  ,['${coUrl[0]}', ${coUrl[1]}]
+                 </c:forEach>
+            ]);
+            var options = {
+             title: 'Самые популярные URL по странам',
+             hAxis: {title: 'URL'},
+             vAxis: {title: 'Количество запросов'}
+            };
+            var chart = new google.visualization.ColumnChart(document.getElementById('countryUrlStatistic'));
+            chart.draw(data, options);
+           }
+           </script>
+           <script>
+             google.load("visualization", "1", {packages:["corechart"]});
+             google.setOnLoadCallback(drawChart1);
+             function drawChart1() {
+              var data = google.visualization.arrayToDataTable([
+               ['URL', 'Количество запросов']
+                   <c:forEach var="ciUrl" items="${cityUrl}">
+                    ,['${ciUrl[0]}', ${ciUrl[1]}]
+                   </c:forEach>
+              ]);
+              var options = {
+               title: 'Самые популярные URL по городам',
+               hAxis: {title: 'URL'},
+               vAxis: {title: 'Количество запросов'}
+              };
+              var chart = new google.visualization.ColumnChart(document.getElementById('cityUrlStatistic'));
+              chart.draw(data, options);
+             }
+          </script>
+
 </head>
 <body>
  <style>
@@ -168,6 +207,30 @@
   </div>
   </form>
 
+  <form name="f00" th:action="@{/page}" method="get">
+  <div id="countryUrlStatistic" class="block1"></div>
+  <div id="cityUrlStatistic" class="block2"></div>
+  <label for="dateCountryCityUrl1">Дата c</label>
+  <input type="text" id="dateCountryCityUrl1" name="dateCountryCityUrl1"/>
+  <label for="dateCountryCityUrl2">Дата по</label>
+  <input type="text" id="dateCountryCityUrl2" name="dateCountryCityUrl2"/>
+  <input type="text" style="display: none;" id="cityAndCountryUrl" name="action" value="cityAndCountryUrl"/>
+    <select>
+        <c:forEach var="fac" items="${findAllCountry}">
+          <option>${fac}</option>
+        </c:forEach>
+    </select>
+    <select>
+        <c:forEach var="faci" items="${findAllCity}">
+          <option>${faci}</option>
+        </c:forEach>
+    </select>
+  <br> <br>
+  <div class="form-actions">
+      <button type="submit" class="btn">Показать</button>
+  </div>
+  </form>
+
   <br>
     <h2>N последних запросов</h2>
        <c:if test="${not empty remotehostUrl}">
@@ -185,6 +248,7 @@
            </table>
            </c:if>
   <br>
+
      <h2>Среднее количство байт переданное клиентами</h2>
         <form name="f1" th:action="@{/page}" method="get">
              <fieldset>
