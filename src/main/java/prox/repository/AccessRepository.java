@@ -45,9 +45,7 @@ public interface AccessRepository extends JpaRepository<Access, Long> {
                                @Param(value = "date2")Date date2);
 
   /**Количество запросов по странам*/
-  @Query(nativeQuery = true, value="SELECT country,count(country) FROM Access  where time between coalesce(:date1,'2016-01-01 00:00:01') " +
-          "and coalesce(:date2,'2017-12-12 00:00:01') group by country " +
-          "order by count(country) desc limit 4")
+  @Query(nativeQuery = true, value="SELECT country,count(country) FROM Access  where time between coalesce(:date1,'2016-01-01 00:00:01') and coalesce(:date2,'2017-12-12 00:00:01') group by country order by count(country) desc limit 4")
   List<CountryCount> findCountryCount(@Param(value = "date1")Date date1, @Param(value = "date2")Date date2);
 
   /**Количество запросов по городам*/
@@ -57,13 +55,13 @@ public interface AccessRepository extends JpaRepository<Access, Long> {
 
   /**Самые популярные URL по странам*/
   @Query(nativeQuery = true, value="SELECT url_0,count(url_0) FROM Access where country=coalesce(:countryUrl,'Russia') and time between" +
-          " coalesce(:date1,'2016-01-01 00:00:01') and coalesce(:date2,'2017-12-12 00:00:01') group by url_0" +
+          " coalesce(:date1,'2016-01-01 00:00:01') and coalesce(:date2,'2017-12-12 00:00:01') group by url_0 " +
           "order by count(url_0) desc limit 4")
-  List<UrlCount> findUrlCountry(@Param(value = "countryUrl")String cityUrl, @Param(value = "date1")Date date1, @Param(value = "date2")Date date2);
+  List<UrlCount> findUrlCountry(@Param(value = "countryUrl")String countryUrl, @Param(value = "date1")Date date1, @Param(value = "date2")Date date2);
 
   /**Самые популярные URL по городам*/
   @Query(nativeQuery = true, value="SELECT url_0,count(url_0) FROM Access where city=coalesce(:cityUrl,'Klimovsk') and time between" +
-          " coalesce(:date1,'2016-01-01 00:00:01') and coalesce(:date2,'2017-12-12 00:00:01') group by url_0" +
+          " coalesce(:date1,'2016-01-01 00:00:01') and coalesce(:date2,'2017-12-12 00:00:01') group by url_0 " +
           "order by count(url_0) desc limit 4")
   List<UrlCount> findUrlCity(@Param(value = "cityUrl")String cityUrl, @Param(value = "date1")Date date1, @Param(value = "date2")Date date2);
 }

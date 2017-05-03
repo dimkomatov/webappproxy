@@ -215,14 +215,14 @@
   <label for="dateCountryCityUrl2">Дата по</label>
   <input type="text" id="dateCountryCityUrl2" name="dateCountryCityUrl2"/>
   <input type="text" style="display: none;" id="cityAndCountryUrl" name="action" value="cityAndCountryUrl"/>
-    <select>
+    <select  id="countryCoUrl"  name="countryCoUrl">
         <c:forEach var="fac" items="${findAllCountry}">
-          <option>${fac}</option>
+          <option value="${fac}">${fac}</option>
         </c:forEach>
     </select>
-    <select>
+    <select id="cityCoUrl"  name="cityCoUrl">
         <c:forEach var="faci" items="${findAllCity}">
-          <option>${faci}</option>
+          <option value="${faci}">${faci}</option>
         </c:forEach>
     </select>
   <br> <br>
