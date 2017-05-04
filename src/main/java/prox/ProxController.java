@@ -36,6 +36,10 @@ public class ProxController {
                                       @RequestParam(value="dateCountryCityUrl2", required=false) String dateCountryCityUrl2,
                                       @RequestParam(value="countryCoUrl", required=false) String countryCoUrl,
                                       @RequestParam(value="cityCoUrl", required=false) String cityCoUrl,
+                                      @RequestParam(value="dateCountryCityHP1", required=false) String dateCountryCityHP1,
+                                      @RequestParam(value="dateCountryCityHP2", required=false) String dateCountryCityHP2,
+                                      @RequestParam(value="countryCoHP", required=false) String countryCoHP,
+                                      @RequestParam(value="cityCoHP", required=false) String cityCoHP,
                                       @RequestParam(value="dateAvgRhBytes1", required=false) String dateAvgRhBytes1,
                                       @RequestParam(value="dateAvgRhBytes2", required=false) String dateAvgRhBytes2) throws ParseException {
         if (action == null)
@@ -85,6 +89,21 @@ public class ProxController {
 
             List<UrlCount> cityUrl = accessRepository.findUrlCity(cityCoUrl,date1, date2);
             model.addAttribute("cityUrl", cityUrl);
+        }
+
+        if (action.equals("cityAndCountryHP")) {
+            try {
+                date1 = formatter.parse(dateCountryCityHP1);
+                date2 = formatter.parse(dateCountryCityHP2);
+
+            } catch (ParseException e) {
+                System.out.println("Error");
+            }
+            List<UrlCount> countryHP = accessRepository.findUrlCountry(countryCoHP,date1, date2);
+            model.addAttribute("countryHP", countryHP);
+
+            List<UrlCount> cityHP = accessRepository.findUrlCity(cityCoHP,date1, date2);
+            model.addAttribute("cityHP", cityHP);
         }
 
         if (action.equals("findAvgRhBytes")) {

@@ -56,7 +56,7 @@
                  </c:forEach>
             ]);
             var options = {
-             title: 'Самые популярные URL по странам',
+             title: 'Самые популярные URL по стране ' + document.getElementById('countryCoUrl').value,
              hAxis: {title: 'URL'},
              vAxis: {title: 'Количество запросов'}
             };
@@ -75,11 +75,50 @@
                    </c:forEach>
               ]);
               var options = {
-               title: 'Самые популярные URL по городам',
+               title: 'Самые популярные URL по городу ' + document.getElementById('cityCoUrl').value,
                hAxis: {title: 'URL'},
                vAxis: {title: 'Количество запросов'}
               };
               var chart = new google.visualization.ColumnChart(document.getElementById('cityUrlStatistic'));
+              chart.draw(data, options);
+             }
+          </script>
+
+          <script>
+           google.load("visualization", "1", {packages:["corechart"]});
+           google.setOnLoadCallback(drawChart1);
+           function drawChart1() {
+            var data = google.visualization.arrayToDataTable([
+             ['Поисковая система', 'Количество переходов']
+                 <c:forEach var="coHP" items="${countryHP}">
+                  ,['${coHP[0]}', ${coHP[1]}]
+                 </c:forEach>
+            ]);
+            var options = {
+             title: 'Самые популярные поисковые системы по стране ' + document.getElementById('countryCoHP').value,
+             hAxis: {title: 'Поисковая система'},
+             vAxis: {title: 'Количество запросов'}
+            };
+            var chart = new google.visualization.ColumnChart(document.getElementById('countryHPStatistic'));
+            chart.draw(data, options);
+           }
+           </script>
+           <script>
+             google.load("visualization", "1", {packages:["corechart"]});
+             google.setOnLoadCallback(drawChart1);
+             function drawChart1() {
+              var data = google.visualization.arrayToDataTable([
+               ['Поисковая система', 'Количество переходов']
+                   <c:forEach var="ciHP" items="${cityHP}">
+                    ,['${ciHP[0]}', ${ciHP[1]}]
+                   </c:forEach>
+              ]);
+              var options = {
+               title: 'Самые популярные поисковые системы по городу ' + document.getElementById('cityCoHP').value,
+               hAxis: {title: 'Поисковая система'},
+               vAxis: {title: 'Количество запросов'}
+              };
+              var chart = new google.visualization.ColumnChart(document.getElementById('cityHPStatistic'));
               chart.draw(data, options);
              }
           </script>
@@ -215,11 +254,13 @@
   <label for="dateCountryCityUrl2">Дата по</label>
   <input type="text" id="dateCountryCityUrl2" name="dateCountryCityUrl2"/>
   <input type="text" style="display: none;" id="cityAndCountryUrl" name="action" value="cityAndCountryUrl"/>
-    <select  id="countryCoUrl"  name="countryCoUrl">
+  <label for="countryCoUrl">Страна</label>
+    <select  id="countryCoUrl" name="countryCoUrl">
         <c:forEach var="fac" items="${findAllCountry}">
           <option value="${fac}">${fac}</option>
         </c:forEach>
     </select>
+    <label for="cityCoUrl">Город</label>
     <select id="cityCoUrl"  name="cityCoUrl">
         <c:forEach var="faci" items="${findAllCity}">
           <option value="${faci}">${faci}</option>
@@ -230,6 +271,32 @@
       <button type="submit" class="btn">Показать</button>
   </div>
   </form>
+
+    <form name="f000" th:action="@{/page}" method="get">
+    <div id="countryHPStatistic" class="block1"></div>
+    <div id="cityHPStatistic" class="block2"></div>
+    <label for="dateCountryCityHP1">Дата c</label>
+    <input type="text" id="dateCountryCityHP1" name="dateCountryCityHP1"/>
+    <label for="dateCountryCityHP2">Дата по</label>
+    <input type="text" id="dateCountryCityHP2" name="dateCountryCityHP2"/>
+    <input type="text" style="display: none;" id="cityAndCountryHP" name="action" value="cityAndCountryHP"/>
+    <label for="countryCoHP">Страна</label>
+      <select  id="countryCoHP" name="countryCoHP">
+          <c:forEach var="fac" items="${findAllCountry}">
+            <option value="${fac}">${fac}</option>
+          </c:forEach>
+      </select>
+      <label for="cityCoHP">Город</label>
+      <select id="cityCoHP"  name="cityCoHP">
+          <c:forEach var="faci" items="${findAllCity}">
+            <option value="${faci}">${faci}</option>
+          </c:forEach>
+      </select>
+    <br> <br>
+    <div class="form-actions">
+        <button type="submit" class="btn">Показать</button>
+    </div>
+    </form>
 
   <br>
     <h2>N последних запросов</h2>
