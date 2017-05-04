@@ -40,6 +40,10 @@ public class ProxController {
                                       @RequestParam(value="dateCountryCityHP2", required=false) String dateCountryCityHP2,
                                       @RequestParam(value="countryCoHP", required=false) String countryCoHP,
                                       @RequestParam(value="cityCoHP", required=false) String cityCoHP,
+                                      @RequestParam(value="dateCountryCityAvgEl1", required=false) String dateCountryCityAvgEl1,
+                                      @RequestParam(value="dateCountryCityAvgEl2", required=false) String dateCountryCityAvgEl2,
+                                      @RequestParam(value="countryCoAvgEl", required=false) String countryCoAvgEl,
+                                      @RequestParam(value="cityCoAvgEl", required=false) String cityCoAvgEl,
                                       @RequestParam(value="dateAvgRhBytes1", required=false) String dateAvgRhBytes1,
                                       @RequestParam(value="dateAvgRhBytes2", required=false) String dateAvgRhBytes2) throws ParseException {
         if (action == null)
@@ -53,7 +57,6 @@ public class ProxController {
 
         Integer avgBytes = accessRepository.avgBytes();
         model.addAttribute("avgBytes", avgBytes);
-
 
         if (action.equals("cityAndCountry")) {
             try {
@@ -99,11 +102,29 @@ public class ProxController {
             } catch (ParseException e) {
                 System.out.println("Error");
             }
-            List<UrlCount> countryHP = accessRepository.findUrlCountry(countryCoHP,date1, date2);
+            List<UrlCount> countryHP = accessRepository.findHPCountry(countryCoHP,date1, date2);
             model.addAttribute("countryHP", countryHP);
 
-            List<UrlCount> cityHP = accessRepository.findUrlCity(cityCoHP,date1, date2);
+            List<UrlCount> cityHP = accessRepository.findHPCity(cityCoHP,date1, date2);
             model.addAttribute("cityHP", cityHP);
+        }
+
+        List<String> findAllUrl = accessRepository.findAllUrl();
+        model.addAttribute("findAllUrl", findAllUrl);
+
+        if (action.equals("cityAndCountryAvgEl")) {
+            try {
+                date1 = formatter.parse(dateCountryCityAvgEl1);
+                date2 = formatter.parse(dateCountryCityAvgEl2);
+
+            } catch (ParseException e) {
+                System.out.println("Error");
+            }
+            List<UrlCount> countryAvgEl = accessRepository.findAvgElapseCountry(countryCoAvgEl,date1, date2);
+            model.addAttribute("countryAvgEl", countryAvgEl);
+
+            List<UrlCount> cityAvgEl = accessRepository.findAvgElapseCity(cityCoAvgEl,date1, date2);
+            model.addAttribute("cityAvgEl", cityAvgEl);
         }
 
         if (action.equals("findAvgRhBytes")) {

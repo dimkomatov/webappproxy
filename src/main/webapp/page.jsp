@@ -123,6 +123,44 @@
              }
           </script>
 
+          <script>
+           google.load("visualization", "1", {packages:["corechart"]});
+           google.setOnLoadCallback(drawChart1);
+           function drawChart1() {
+            var data = google.visualization.arrayToDataTable([
+             ['Страна', 'Среденее время посещения URL']
+                 <c:forEach var="coAvgEl" items="${countryAvgEl}">
+                  ,['${coAvgEl[0]}', ${coAvgEl[1]}]
+                 </c:forEach>
+            ]);
+            var options = {
+             title: 'Среднее время посещения URL ' + document.getElementById('countryCoAvgEl').value,
+             hAxis: {title: 'Страна'},
+             vAxis: {title: 'Среднее время посещения'}
+            };
+            var chart = new google.visualization.ColumnChart(document.getElementById('countryAvgElStatistic'));
+            chart.draw(data, options);
+           }
+           </script>
+           <script>
+             google.load("visualization", "1", {packages:["corechart"]});
+             google.setOnLoadCallback(drawChart1);
+             function drawChart1() {
+              var data = google.visualization.arrayToDataTable([
+               ['Город', 'Среденее время посещения URL']
+                   <c:forEach var="ciAvgEl" items="${cityAvgEl}">
+                    ,['${ciAvgEl[0]}', ${ciAvgEl[1]}]
+                   </c:forEach>
+              ]);
+              var options = {
+               title: 'Среденее время посещения URL ' + document.getElementById('cityCoAvgEl').value,
+               hAxis: {title: 'Город'},
+               vAxis: {title: 'Среднее время посещения'}
+              };
+              var chart = new google.visualization.ColumnChart(document.getElementById('cityAvgElStatistic'));
+              chart.draw(data, options);
+             }
+          </script>
 </head>
 <body>
  <style>
@@ -232,6 +270,7 @@
   <h2>Количество уникальных пользователей proxy-сервера: ${countDistinct}</h2>
   <h2>Среднее количество байт, переданное за сессию: ${avgBytes}</h2>
 
+  <h2>Статистика количества запросов по странам/городам</h2>
   <form name="f0" th:action="@{/page}" method="get">
   <div id="countryStatistic" class="block1"></div>
   <div id="cityStatistic" class="block2"></div>
@@ -246,6 +285,7 @@
   </div>
   </form>
 
+  <h2>Самые популярные URL по странам/городам</h2>
   <form name="f00" th:action="@{/page}" method="get">
   <div id="countryUrlStatistic" class="block1"></div>
   <div id="cityUrlStatistic" class="block2"></div>
@@ -272,6 +312,7 @@
   </div>
   </form>
 
+    <h2>Самые популярные поисковики по странам/городам</h2>
     <form name="f000" th:action="@{/page}" method="get">
     <div id="countryHPStatistic" class="block1"></div>
     <div id="cityHPStatistic" class="block2"></div>
@@ -290,6 +331,27 @@
       <select id="cityCoHP"  name="cityCoHP">
           <c:forEach var="faci" items="${findAllCity}">
             <option value="${faci}">${faci}</option>
+          </c:forEach>
+      </select>
+    <br> <br>
+    <div class="form-actions">
+        <button type="submit" class="btn">Показать</button>
+    </div>
+    </form>
+
+    <h2>Среднее время посещения URL по странам/городам</h2>
+    <form name="f0000" th:action="@{/page}" method="get">
+    <div id="countryAvgElStatistic" class="block1"></div>
+    <div id="cityAvgElStatistic" class="block2"></div>
+    <label for="dateCountryCityAvgEl1">Дата c</label>
+    <input type="text" id="dateCountryCityAvgEl1" name="dateCountryCityAvgEl1"/>
+    <label for="dateCountryCityAvgEl2">Дата по</label>
+    <input type="text" id="dateCountryCityAvgEl2" name="dateCountryCityAvgEl2"/>
+    <input type="text" style="display: none;" id="cityAndCountryAvgEl" name="action" value="cityAndCountryAvgEl"/>
+    <label for="countryCoAvgEl">URL</label>
+      <select  id="countryCoAvgEl" name="countryCoAvgEl">
+          <c:forEach var="url1" items="${findAllUrl}">
+            <option value="${url1}">${url1}</option>
           </c:forEach>
       </select>
     <br> <br>
