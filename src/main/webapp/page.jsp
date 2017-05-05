@@ -134,7 +134,7 @@
                  </c:forEach>
             ]);
             var options = {
-             title: 'Среднее время посещения URL ' + document.getElementById('countryCoAvgEl').value,
+             title: 'Среднее время посещения URL ' + document.getElementById('coAvgEl').value + ' по странам',
              hAxis: {title: 'Страна'},
              vAxis: {title: 'Среднее время посещения'}
             };
@@ -153,7 +153,7 @@
                    </c:forEach>
               ]);
               var options = {
-               title: 'Среденее время посещения URL ' + document.getElementById('cityCoAvgEl').value,
+               title: 'Среденее время посещения URL ' + document.getElementById('coAvgEl').value  + ' по городам',
                hAxis: {title: 'Город'},
                vAxis: {title: 'Среднее время посещения'}
               };
@@ -269,7 +269,7 @@
   <h2>Общее количество подключений к proxy-серверу: ${countAll}</h2>
   <h2>Количество уникальных пользователей proxy-сервера: ${countDistinct}</h2>
   <h2>Среднее количество байт, переданное за сессию: ${avgBytes}</h2>
-
+  <br>
   <h2>Статистика количества запросов по странам/городам</h2>
   <form name="f0" th:action="@{/page}" method="get">
   <div id="countryStatistic" class="block1"></div>
@@ -297,13 +297,13 @@
   <label for="countryCoUrl">Страна</label>
     <select  id="countryCoUrl" name="countryCoUrl">
         <c:forEach var="fac" items="${findAllCountry}">
-          <option value="${fac}">${fac}</option>
+          <option value="${fac}" ${fac == selectedFacUrl ? 'selected="selected"' : ''}>${fac}</option>
         </c:forEach>
     </select>
     <label for="cityCoUrl">Город</label>
     <select id="cityCoUrl"  name="cityCoUrl">
         <c:forEach var="faci" items="${findAllCity}">
-          <option value="${faci}">${faci}</option>
+          <option value="${faci}" ${faci == selectedFaciUrl ? 'selected="selected"' : ''}>${faci}</option>
         </c:forEach>
     </select>
   <br> <br>
@@ -324,13 +324,13 @@
     <label for="countryCoHP">Страна</label>
       <select  id="countryCoHP" name="countryCoHP">
           <c:forEach var="fac" items="${findAllCountry}">
-            <option value="${fac}">${fac}</option>
+            <option value="${fac}" ${fac == selectedFacHP ? 'selected="selected"' : ''}>${fac}</option>
           </c:forEach>
       </select>
       <label for="cityCoHP">Город</label>
       <select id="cityCoHP"  name="cityCoHP">
           <c:forEach var="faci" items="${findAllCity}">
-            <option value="${faci}">${faci}</option>
+            <option value="${faci}" ${faci == selectedFaciHP ? 'selected="selected"' : ''}>${faci}</option>
           </c:forEach>
       </select>
     <br> <br>
@@ -348,10 +348,10 @@
     <label for="dateCountryCityAvgEl2">Дата по</label>
     <input type="text" id="dateCountryCityAvgEl2" name="dateCountryCityAvgEl2"/>
     <input type="text" style="display: none;" id="cityAndCountryAvgEl" name="action" value="cityAndCountryAvgEl"/>
-    <label for="countryCoAvgEl">URL</label>
-      <select  id="countryCoAvgEl" name="countryCoAvgEl">
+    <label for="coAvgEl">URL</label>
+      <select  id="coAvgEl" name="coAvgEl">
           <c:forEach var="url1" items="${findAllUrl}">
-            <option value="${url1}">${url1}</option>
+            <option value="${url1}" ${url1 == selectedUrlAvgEl ? 'selected="selected"' : ''}>${url1}</option>
           </c:forEach>
       </select>
     <br> <br>
