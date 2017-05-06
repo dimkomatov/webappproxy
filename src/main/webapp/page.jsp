@@ -360,8 +360,77 @@
     </div>
     </form>
 
+    <br>
+    <h2>Полная статистика по отдельному клиенту</h2>
+        <form name="f100" th:action="@{/page}" method="get">
+             <fieldset>
+                              <br>
+                 <table bordercolor="black" border="1" align="center">
+                  <tr>
+                        <td align="center"> Страна клиента </td>
+                        <td align="center"> ${findClientCountry} </td>
+                  </tr>
+                  <tr>
+                       <td align="center"> Город клиента </td>
+                       <td align="center">${findClientCity}</td>
+                  </tr>
+                  <tr>
+                       <td align="center"> Суммарное время пользования прокси </td>
+                       <td align="center"> ${findClientSumElapse} </td>
+                  </tr>
+                  <tr>
+                       <td align="center"> Суммарное переданное количесво байт </td>
+                       <td align="center"> ${findClientSumBytes} </td>
+                  </tr>
+                  <tr>
+                       <td align="center"> Наиболее часто передаваемый тип данных </td>
+                       <td align="center"> ${findClientMostType} </td>
+                  </tr>
+                  <tr>
+                       <td align="center"> Наиболее часто используемая поисковая система </td>
+                       <td align="center"> ${findClientMostHP} </td>
+                  </tr>
+                 </table>
+                 <br>
+                <c:if test="${not empty findClientUrlSumEl}">
+                <table bordercolor="black" border="1" align="center">
+                  <tr>
+                      <td align="center">URL</td>
+                      <td align="center">Суммарное количество времени (в миллисекундах)</td>
+                      <td align="center">Количество обращений к URL</td>
+                  </tr>
+                   <c:forEach var="rhu" items="${findClientUrlSumEl}">
+                   <tr>
+                       <td align="center">${rhu[0]}</td>
+                       <td align="center">${rhu[1]}</td>
+                       <td align="center">${rhu[2]}</td>
+                   </tr>
+                   </c:forEach>
+               </table>
+               </c:if>
+                 <br>
+             <label for="rhClientStatistic">Клиентский IP</label>
+               <select  id="rhClientStatistic" name="rhClientStatistic">
+                   <c:forEach var="rhCS" items="${findAllClients}">
+                     <option value="${rhCS}" ${rhCS == selectedRhCS ? 'selected="selected"' : ''}>${rhCS}</option>
+                   </c:forEach>
+               </select>
+                 <label for="dateClientStatistic1">Дата c</label>
+                 <input type="text" id="dateClientStatistic1" name="dateClientStatistic1"/>
+                 <label for="dateClientStatistic2">Дата по</label>
+                 <input type="text" id="dateClientStatistic2" name="dateClientStatistic2"/>
+                 <label for="methodClientStatistic">HTTP метод</label>
+                 <input type="text" id="methodClientStatistic" name="methodClientStatistic"/>
+                 <input type="text" style="display: none;" id="clientStatistic" name="action" value="clientStatistic"/>
+                 <br><br>
+                 <div class="form-actions">
+                     <button type="submit" class="btn">Показать</button>
+                 </div>
+               </fieldset>
+                   </form>
+
   <br>
-    <h2>N последних запросов</h2>
+    <h2>10 последних запросов через Proxy-сервер</h2>
        <c:if test="${not empty remotehostUrl}">
             <table bordercolor="black" border="1" align="center">
               <tr>

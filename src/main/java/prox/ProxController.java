@@ -43,6 +43,10 @@ public class ProxController {
                                       @RequestParam(value="dateCountryCityAvgEl1", required=false) String dateCountryCityAvgEl1,
                                       @RequestParam(value="dateCountryCityAvgEl2", required=false) String dateCountryCityAvgEl2,
                                       @RequestParam(value="coAvgEl", required=false) String coAvgEl,
+                                      @RequestParam(value="dateClientStatistic1", required=false) String dateClientStatistic1,
+                                      @RequestParam(value="dateClientStatistic2", required=false) String dateClientStatistic2,
+                                      @RequestParam(value="rhClientStatistic", required=false) String rhClientStatistic,
+                                      @RequestParam(value="methodClientStatistic", required=false) String methodClientStatistic,
                                       @RequestParam(value="dateAvgRhBytes1", required=false) String dateAvgRhBytes1,
                                       @RequestParam(value="dateAvgRhBytes2", required=false) String dateAvgRhBytes2) throws ParseException {
         if (action == null)
@@ -146,8 +150,44 @@ public class ProxController {
             model.addAttribute("findAvgRhBytes", findAvgRhBytes);
         }
 
+        /*Client*/
+        model.addAttribute("selectedRhCS", rhClientStatistic);
+        List<String> findAllClients = accessRepository.findAllClients();
+        model.addAttribute("findAllClients", findAllClients);
+        if (action.equals("clientStatistic")) {
+            try {
+                date1 = formatter.parse(dateClientStatistic1);
+                date2 = formatter.parse(dateClientStatistic2);
+
+            } catch (ParseException e) {
+                System.out.println("Error");
+            }
+
+            String findClientCity = accessRepository.findClientCity(rhClientStatistic);
+            model.addAttribute("findClientCity", findClientCity);
+
+            String findClientCountry = accessRepository.findClientCountry(rhClientStatistic);
+            model.addAttribute("findClientCountry", findClientCountry);
+
+            Integer findClientSumElapse = accessRepository.findClientSumElapse(rhClientStatistic,date1,date2);
+            model.addAttribute("findClientSumElapse", findClientSumElapse);
+
+            Integer findClientSumBytes = accessRepository.findClientSumBytes(rhClientStatistic,date1,date2);
+            model.addAttribute("findClientSumBytes", findClientSumBytes);
+
+            String findClientMostType = accessRepository.findClientMostType(rhClientStatistic,date1,date2);
+            model.addAttribute("findClientMostType", findClientMostType);
+
+            String findClientMostHP = accessRepository.findClientMostHP(rhClientStatistic,date1,date2);
+            model.addAttribute("findClientMostHP", findClientMostHP);
+
+            List<Url2Count> findClientUrlSumEl = accessRepository.findClientUrlSumEl(rhClientStatistic,methodClientStatistic,date1,date2);
+            model.addAttribute("findClientUrlSumEl", findClientUrlSumEl);
+        }
+
         List<RemotehostUrlAccess> remotehostUrl = accessRepository.findRemotehostUrl(10);
         model.addAttribute("remotehostUrl", remotehostUrl);
+
         return model;
     }
 }
