@@ -154,6 +154,7 @@ public class ProxController {
         model.addAttribute("selectedRhCS", rhClientStatistic);
         List<String> findAllClients = accessRepository.findAllClients();
         model.addAttribute("findAllClients", findAllClients);
+        model.addAttribute("rhClient", rhClientStatistic);
         if (action.equals("clientStatistic")) {
             try {
                 date1 = formatter.parse(dateClientStatistic1);

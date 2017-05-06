@@ -361,10 +361,10 @@
     </form>
 
     <br>
-    <h2>Полная статистика по отдельному клиенту</h2>
+    <h2>Полная статистика по клиенту с IP=${rhClient}</h2>
         <form name="f100" th:action="@{/page}" method="get">
              <fieldset>
-                              <br>
+                  <br>
                  <table bordercolor="black" border="1" align="center">
                   <tr>
                         <td align="center"> Страна клиента </td>
@@ -450,17 +450,6 @@
      <h2>Среднее количство байт переданное клиентами</h2>
         <form name="f1" th:action="@{/page}" method="get">
              <fieldset>
-                 <label for="countRhUrl">Количество</label>
-                 <input type="text" id="countRhUrl" name="countRhUrl"/>
-                 <label for="dateAvgRhBytes1">Дата c</label>
-                 <input type="text" id="dateAvgRhBytes1" name="dateAvgRhBytes1"/>
-                 <label for="dateAvgRhBytes2">Дата по</label>
-                 <input type="text" id="dateAvgRhBytes2" name="dateAvgRhBytes2"/>
-                 <input type="text" style="display: none;" id="findAvgRhBytes" name="action" value="findAvgRhBytes"/>
-                 <br>
-                 <div class="form-actions">
-                     <button type="submit" class="btn">Показать</button>
-                 </div>
            <c:if test="${not empty findAvgRhBytes}">
                 <table bordercolor="black" border="1" align="center">
                   <tr>
@@ -475,6 +464,18 @@
                    </c:forEach>
                </table>
                </c:if>
+               <br>
+                 <label for="countRhUrl">Количество</label>
+                 <input type="text" id="countRhUrl" name="countRhUrl"/>
+                 <label for="dateAvgRhBytes1">Дата c</label>
+                 <input type="text" id="dateAvgRhBytes1" name="dateAvgRhBytes1"/>
+                 <label for="dateAvgRhBytes2">Дата по</label>
+                 <input type="text" id="dateAvgRhBytes2" name="dateAvgRhBytes2"/>
+                 <input type="text" style="display: none;" id="findAvgRhBytes" name="action" value="findAvgRhBytes"/>
+                 <br> <br>
+                 <div class="form-actions">
+                     <button type="submit" class="btn">Показать</button>
+                 </div>
                </fieldset>
                    </form>
     <br>

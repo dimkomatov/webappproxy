@@ -134,6 +134,6 @@ public interface AccessRepository extends JpaRepository<Access, Long> {
           " where remotehost=coalesce(:rh,'89.23.206.221')" +
           " and method=coalesce(:method,'GET') and time between" +
           " coalesce(:date1,'2016-01-01 00:00:01') and coalesce(:date2,'2017-12-12 00:00:01')" +
-          " group by url_0 order by url_0,count(url_0) desc limit 5")
+          " group by url_0 order by url_0,sum(elapse) desc limit 5")
   List<Url2Count> findClientUrlSumEl(@Param(value = "rh")String rh,@Param(value = "method")String method, @Param(value = "date1")Date date1, @Param(value = "date2")Date date2);
 }
