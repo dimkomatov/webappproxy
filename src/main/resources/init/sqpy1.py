@@ -4,12 +4,11 @@ import os
 import csv
 import hashlib
 import datetime
-import psycopg2
 from peewee import *
 
 
 # global data base connection, it can use any peewee db connection
-db = psycopg2.connect("dbname='squid' user='root' password='root'")
+db = MySQLDatabase('squid', user='root', passwd='root')
 
 class CustomModel(Model):
 	class Meta:

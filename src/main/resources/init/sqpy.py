@@ -62,7 +62,7 @@ if __name__ == "__main__":
 			response = reader.city(line[2])
 			entry.country = response.country.name
 			entry.city = response.city.name
-		except ValueError:
+		except (ValueError,geoip2.errors.AddressNotFoundError) as e:
 			pass
 		entry.code = line[3]
 		entry.bytes = line[4]
