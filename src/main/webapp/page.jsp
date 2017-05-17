@@ -274,9 +274,9 @@
   <form name="f0" th:action="@{/page}" method="get">
   <div id="countryStatistic" class="block1"></div>
   <div id="cityStatistic" class="block2"></div>
-  <label for="dateCountryCity1">Дата c</label>
+  <label for="dateCountryCity1">Время с</label>
   <input type="text" id="dateCountryCity1" name="dateCountryCity1"/>
-  <label for="dateCountryCity2">Дата по</label>
+  <label for="dateCountryCity2">Время по</label>
   <input type="text" id="dateCountryCity2" name="dateCountryCity2"/>
   <input type="text" style="display: none;" id="cityAndCountry" name="action" value="cityAndCountry"/>
   <br> <br>
@@ -289,9 +289,9 @@
   <form name="f00" th:action="@{/page}" method="get">
   <div id="countryUrlStatistic" class="block1"></div>
   <div id="cityUrlStatistic" class="block2"></div>
-  <label for="dateCountryCityUrl1">Дата c</label>
+  <label for="dateCountryCityUrl1">Время с</label>
   <input type="text" id="dateCountryCityUrl1" name="dateCountryCityUrl1"/>
-  <label for="dateCountryCityUrl2">Дата по</label>
+  <label for="dateCountryCityUrl2">Время по</label>
   <input type="text" id="dateCountryCityUrl2" name="dateCountryCityUrl2"/>
   <input type="text" style="display: none;" id="cityAndCountryUrl" name="action" value="cityAndCountryUrl"/>
   <label for="countryCoUrl">Страна</label>
@@ -316,9 +316,9 @@
     <form name="f000" th:action="@{/page}" method="get">
     <div id="countryHPStatistic" class="block1"></div>
     <div id="cityHPStatistic" class="block2"></div>
-    <label for="dateCountryCityHP1">Дата c</label>
+    <label for="dateCountryCityHP1">Время с</label>
     <input type="text" id="dateCountryCityHP1" name="dateCountryCityHP1"/>
-    <label for="dateCountryCityHP2">Дата по</label>
+    <label for="dateCountryCityHP2">Время по</label>
     <input type="text" id="dateCountryCityHP2" name="dateCountryCityHP2"/>
     <input type="text" style="display: none;" id="cityAndCountryHP" name="action" value="cityAndCountryHP"/>
     <label for="countryCoHP">Страна</label>
@@ -343,9 +343,9 @@
     <form name="f0000" th:action="@{/page}" method="get">
     <div id="countryAvgElStatistic" class="block1"></div>
     <div id="cityAvgElStatistic" class="block2"></div>
-    <label for="dateCountryCityAvgEl1">Дата c</label>
+    <label for="dateCountryCityAvgEl1">Время с</label>
     <input type="text" id="dateCountryCityAvgEl1" name="dateCountryCityAvgEl1"/>
-    <label for="dateCountryCityAvgEl2">Дата по</label>
+    <label for="dateCountryCityAvgEl2">Время по</label>
     <input type="text" id="dateCountryCityAvgEl2" name="dateCountryCityAvgEl2"/>
     <input type="text" style="display: none;" id="cityAndCountryAvgEl" name="action" value="cityAndCountryAvgEl"/>
     <label for="coAvgEl">URL</label>
@@ -415,9 +415,9 @@
                      <option value="${rhCS}" ${rhCS == selectedRhCS ? 'selected="selected"' : ''}>${rhCS}</option>
                    </c:forEach>
                </select>
-                 <label for="dateClientStatistic1">Дата c</label>
+                 <label for="dateClientStatistic1">Время с</label>
                  <input type="text" id="dateClientStatistic1" name="dateClientStatistic1"/>
-                 <label for="dateClientStatistic2">Дата по</label>
+                 <label for="dateClientStatistic2">Время по</label>
                  <input type="text" id="dateClientStatistic2" name="dateClientStatistic2"/>
                  <label for="methodClientStatistic">HTTP метод</label>
                  <input type="text" id="methodClientStatistic" name="methodClientStatistic"/>
@@ -467,9 +467,9 @@
                <br>
                  <label for="countRhUrl">Количество</label>
                  <input type="text" id="countRhUrl" name="countRhUrl"/>
-                 <label for="dateAvgRhBytes1">Дата c</label>
+                 <label for="dateAvgRhBytes1">Время с</label>
                  <input type="text" id="dateAvgRhBytes1" name="dateAvgRhBytes1"/>
-                 <label for="dateAvgRhBytes2">Дата по</label>
+                 <label for="dateAvgRhBytes2">Время по</label>
                  <input type="text" id="dateAvgRhBytes2" name="dateAvgRhBytes2"/>
                  <input type="text" style="display: none;" id="findAvgRhBytes" name="action" value="findAvgRhBytes"/>
                  <br> <br>
