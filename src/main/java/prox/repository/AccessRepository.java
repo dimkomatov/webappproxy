@@ -14,27 +14,27 @@ import java.util.List;
 public interface AccessRepository extends JpaRepository<Access, Long> {
 
   /**Общее количество подключений*/
-  @Query("SELECT count(*) FROM Access a")
+  @Query(nativeQuery = true, value="SELECT count(*) FROM Access")
   Integer countAll();
 
   /**Все страны*/
-  @Query("SELECT distinct country FROM Access a")
+  @Query(nativeQuery = true, value="SELECT distinct country FROM Access")
   List<String> findAllCountry();
 
   /**Все города*/
-  @Query("SELECT distinct city FROM Access a")
+  @Query(nativeQuery = true, value="SELECT distinct city FROM Access")
   List<String> findAllCity();
 
   /**Все Распарс URL*/
-  @Query("SELECT distinct url_0 FROM Access a")
+  @Query(nativeQuery = true, value="SELECT distinct url_0 FROM Access")
   List<String> findAllUrl();
 
   /**Все Клиенты*/
-  @Query("SELECT distinct remotehost FROM Access a")
+  @Query(nativeQuery = true, value="SELECT distinct remotehost FROM Access")
   List<String> findAllClients();
 
   /**Общее количество уникальных подключений*/
-  @Query("SELECT count(distinct remotehost) FROM Access a")
+  @Query(nativeQuery = true, value="SELECT count(distinct remotehost) FROM Access")
   Integer countDistinct();
 
   /**Среднее количество передаваемых байт*/

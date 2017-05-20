@@ -348,6 +348,7 @@
     <label for="dateCountryCityAvgEl2">Время по</label>
     <input type="text" id="dateCountryCityAvgEl2" name="dateCountryCityAvgEl2"/>
     <input type="text" style="display: none;" id="cityAndCountryAvgEl" name="action" value="cityAndCountryAvgEl"/>
+    <br><br>
     <label for="coAvgEl">URL</label>
       <select  id="coAvgEl" name="coAvgEl">
           <c:forEach var="url1" items="${findAllUrl}">
