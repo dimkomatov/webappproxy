@@ -1,9 +1,11 @@
 package prox.model;
 
 import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.Date;
 
 @Entity
+@Table(name="store")
 public class Store extends TransactionalEntity{
 
     private static final int serialVersionUID = 1;
