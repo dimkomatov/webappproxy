@@ -68,7 +68,7 @@ public interface AccessRepository extends JpaRepository<Access, Long> {
   List<UrlCount> findUrlCountry(@Param(value = "countryUrl")String countryUrl, @Param(value = "date1")Date date1, @Param(value = "date2")Date date2);
 
   /**Самые популярные URL по городам*/
-  @Query(nativeQuery = true, value="SELECT url_0,count(url_0) FROM access where city=coalesce(:cityUrl,'Klimovsk') and time between" +
+  @Query(nativeQuery = true, value="SELECT url_0,count(url_0) FROM access where city=coalesce(:cityUrl,'Saint Petersburg') and time between" +
           " coalesce(:date1,'2016-01-01 00:00:01') and coalesce(:date2,'2025-12-12 00:00:01') group by url_0 " +
           "order by count(url_0) desc limit 4")
   List<UrlCount> findUrlCity(@Param(value = "cityUrl")String cityUrl, @Param(value = "date1")Date date1, @Param(value = "date2")Date date2);
@@ -80,7 +80,7 @@ public interface AccessRepository extends JpaRepository<Access, Long> {
   List<UrlCount> findHPCountry(@Param(value = "countryUrl")String countryUrl, @Param(value = "date1")Date date1, @Param(value = "date2")Date date2);
 
   /**Самые популярные поисковики по городам*/
-  @Query(nativeQuery = true, value="SELECT hierarchy_peerhost_1,count(hierarchy_peerhost_1) FROM access where city=coalesce(:cityUrl,'Klimovsk') and time between" +
+  @Query(nativeQuery = true, value="SELECT hierarchy_peerhost_1,count(hierarchy_peerhost_1) FROM access where city=coalesce(:cityUrl,'Saint Petersburg') and time between" +
           " coalesce(:date1,'2016-01-01 00:00:01') and coalesce(:date2,'2025-12-12 00:00:01') group by hierarchy_peerhost_1 " +
           "order by count(hierarchy_peerhost_1) desc limit 4")
   List<UrlCount> findHPCity(@Param(value = "cityUrl")String cityUrl, @Param(value = "date1")Date date1, @Param(value = "date2")Date date2);
@@ -101,43 +101,67 @@ public interface AccessRepository extends JpaRepository<Access, Long> {
   /**Статистика по отдельному клиенту*/
 
   /**Город клиента*/
-  @Query(nativeQuery = true, value="SELECT city FROM access where remotehost=:rh")
+  @Query(nativeQuery = true, value="SELECT city FROM access where remotehost=coalesce(:rh,'163.172.72.31')")
   String findClientCity(@Param(value = "rh")String rh);
 
   /**Страна клиента*/
-  @Query(nativeQuery = true, value="SELECT country FROM access where remotehost=:rh")
+  @Query(nativeQuery = true, value="SELECT country FROM access where remotehost=coalesce(:rh,'163.172.72.31')")
   String findClientCountry(@Param(value = "rh")String rh);
 
   /**Общее время пользования прокси клиентом*/
-  @Query(nativeQuery = true, value="SELECT sum(elapse) FROM access where remotehost=:rh and time between" +
+  @Query(nativeQuery = true, value="SELECT sum(elapse) FROM access where remotehost=coalesce(:rh,'163.172.72.31') and time between" +
           " coalesce(:date1,'2016-01-01 00:00:01') and coalesce(:date2,'2025-12-12 00:00:01')")
   Integer findClientSumElapse(@Param(value = "rh")String rh, @Param(value = "date1")Date date1, @Param(value = "date2")Date date2);
 
   /**Суммарное переданное количесво байт  клиентом*/
-  @Query(nativeQuery = true, value="SELECT sum(bytes) FROM access where remotehost=:rh and time between" +
+  @Query(nativeQuery = true, value="SELECT sum(bytes) FROM access where remotehost=coalesce(:rh,'163.172.72.31') and time between" +
           " coalesce(:date1,'2016-01-01 00:00:01') and coalesce(:date2,'2025-12-12 00:00:01')")
   Integer findClientSumBytes(@Param(value = "rh")String rh, @Param(value = "date1")Date date1, @Param(value = "date2")Date date2);
 
   /**Наиболее часто передаваемый тип данных клиентом*/
-  @Query(nativeQuery = true, value="SELECT type FROM access where remotehost=coalesce(:rh,'46.105.98.53') and time between" +
+  @Query(nativeQuery = true, value="SELECT type FROM access where remotehost=coalesce(:rh,'163.172.72.31') and time between" +
           " coalesce(:date1,'2016-01-01 00:00:01') and coalesce(:date2,'2025-12-12 00:00:01')" +
           " group by type order by count(type) desc limit 1")
   String findClientMostType(@Param(value = "rh")String rh, @Param(value = "date1")Date date1, @Param(value = "date2")Date date2);
 
   /**Наиболее часто используемая поисковая система клиентом*/
-  @Query(nativeQuery = true, value="SELECT hierarchy_peerhost_1 FROM access where remotehost=coalesce(:rh,'46.105.98.53') and time between" +
+  @Query(nativeQuery = true, value="SELECT hierarchy_peerhost_1 FROM access where remotehost=coalesce(:rh,'163.172.72.31') and time between" +
           " coalesce(:date1,'2016-01-01 00:00:01') and coalesce(:date2,'2025-12-12 00:00:01')" +
           " group by hierarchy_peerhost_1 order by count(hierarchy_peerhost_1) desc limit 1")
   String findClientMostHP(@Param(value = "rh")String rh, @Param(value = "date1")Date date1, @Param(value = "date2")Date date2);
 
   /**Наиболее часто посещаемые клиентом ресурсы с фильтрацией по методу*/
   @Query(nativeQuery = true, value="SELECT url_0,sum(elapse),count(url_0) FROM access" +
-          " where remotehost=coalesce(:rh,'89.23.206.221')" +
+          " where remotehost=coalesce(:rh,'163.172.72.31')" +
           " and method=coalesce(:method,'GET') and time between" +
           " coalesce(:date1,'2016-01-01 00:00:01') and coalesce(:date2,'2025-12-12 00:00:01')" +
           " group by url_0 order by url_0,sum(elapse) desc limit 5")
   List<Url2Count> findClientUrlSumEl(@Param(value = "rh")String rh,@Param(value = "method")String method, @Param(value = "date1")Date date1, @Param(value = "date2")Date date2);
 
+  /**Статистика по отдельному URL*/
 
+  /**Больше всего используют с этой страны*/
+  @Query(nativeQuery = true, value="select country from access where url_0=coalesce(:url,'m.search.yahoo.com') " +
+          "and time between coalesce(:date1,'2016-01-01 00:00:01') and coalesce(:date2,'2025-12-12 00:00:01') group by country order by count(country) desc limit 1")
+  String findMostUrlCountry(@Param(value = "url")String url, @Param(value = "date1")Date date1, @Param(value = "date2")Date date2);
 
+  /**Больше всего используют с этого города*/
+  @Query(nativeQuery = true, value="select city from access where url_0=coalesce(:url,'m.search.yahoo.com') " +
+          "and time between coalesce(:date1,'2016-01-01 00:00:01') and coalesce(:date2,'2025-12-12 00:00:01') group by city order by count(city) desc limit 1")
+  String findMostUrlCity(@Param(value = "url")String url, @Param(value = "date1")Date date1, @Param(value = "date2")Date date2);
+
+  /**Больше всего используют с этого поисковика*/
+  @Query(nativeQuery = true, value="select hierarchy_peerhost_1 from access where url_0=coalesce(:url,'m.search.yahoo.com') " +
+          "and time between coalesce(:date1,'2016-01-01 00:00:01') and coalesce(:date2,'2025-12-12 00:00:01') group by hierarchy_peerhost_1 order by count(hierarchy_peerhost_1) desc limit 1")
+  String findMostUrlHp(@Param(value = "url")String url, @Param(value = "date1")Date date1, @Param(value = "date2")Date date2);
+
+  /**Больше всего используют эти Ip*/
+  @Query(nativeQuery = true, value="select remotehost,sum(elapse) from access where url_0=coalesce(:url,'m.search.yahoo.com')" +
+          " and time between coalesce(:date1,'2016-01-01 00:00:01') and coalesce(:date2,'2025-12-12 00:00:01')" +
+          " group by remotehost order by sum(elapse) desc limit 10")
+  List<Url2Count> findMostUrlIp(@Param(value = "url")String url, @Param(value = "date1")Date date1, @Param(value = "date2")Date date2);
+
+  /**Суммарное количество обращений к этому URL*/
+  @Query(nativeQuery = true, value="select count(1) from access where url_0=coalesce(:url,'m.search.yahoo.com')")
+  Integer findCountOfUrl(@Param(value = "url")String url);
 }

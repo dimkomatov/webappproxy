@@ -46,6 +46,9 @@ public class ProxController {
                                       @RequestParam(value="dateClientStatistic1", required=false) String dateClientStatistic1,
                                       @RequestParam(value="dateClientStatistic2", required=false) String dateClientStatistic2,
                                       @RequestParam(value="rhClientStatistic", required=false) String rhClientStatistic,
+                                      @RequestParam(value="dateUrlStatistic1", required=false) String dateUrlStatistic1,
+                                      @RequestParam(value="dateUrlStatistic2", required=false) String dateUrlStatistic2,
+                                      @RequestParam(value="urlStatistic", required=false) String urlStatistic,
                                       @RequestParam(value="methodClientStatistic", required=false) String methodClientStatistic,
                                       @RequestParam(value="dateAvgRhBytes1", required=false) String dateAvgRhBytes1,
                                       @RequestParam(value="dateAvgRhBytes2", required=false) String dateAvgRhBytes2) throws ParseException {
@@ -185,6 +188,35 @@ public class ProxController {
             List<Url2Count> findClientUrlSumEl = accessRepository.findClientUrlSumEl(rhClientStatistic,methodClientStatistic,date1,date2);
             model.addAttribute("findClientUrlSumEl", findClientUrlSumEl);
         }
+
+        /*URL*/
+        model.addAttribute("selectedUrl", urlStatistic);
+        model.addAttribute("urlStatistic", urlStatistic);
+        if (action.equals("urlStat")) {
+            try {
+                date1 = formatter.parse(dateUrlStatistic1);
+                date2 = formatter.parse(dateUrlStatistic2);
+
+            } catch (ParseException e) {
+                System.out.println("Error");
+            }
+
+            Integer findCountOfUrl = accessRepository.findCountOfUrl(urlStatistic);
+            model.addAttribute("findCountOfUrl", findCountOfUrl);
+
+            String findMostUrlCountry = accessRepository.findMostUrlCountry(urlStatistic,date1,date2);
+            model.addAttribute("findMostUrlCountry", findMostUrlCountry);
+
+            String findMostUrlCity = accessRepository.findMostUrlCity(urlStatistic,date1,date2);
+            model.addAttribute("findMostUrlCity", findMostUrlCity);
+
+            String findMostUrlHp = accessRepository.findMostUrlHp(urlStatistic,date1,date2);
+            model.addAttribute("findMostUrlHp", findMostUrlHp);
+
+            List<Url2Count> findMostUrlIp = accessRepository.findMostUrlIp(urlStatistic,date1,date2);
+            model.addAttribute("findMostUrlIp", findMostUrlIp);
+        }
+
 
         List<RemotehostUrlAccess> remotehostUrl = accessRepository.findRemotehostUrl(10);
         model.addAttribute("remotehostUrl", remotehostUrl);
