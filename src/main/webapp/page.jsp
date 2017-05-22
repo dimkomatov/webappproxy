@@ -268,7 +268,8 @@
   <div class="wrapper_body">
   <div class="cbm_wrap">
   <h1 class="center">Proxy Server Statistic</h1>
-
+  <a href="/page">Button</a>
+  <a href="/page1">Button</a>
   <h2>Общее количество подключений к proxy-серверу: ${countAll}</h2>
   <h2>Количество уникальных пользователей proxy-сервера: ${countDistinct}</h2>
   <h2>Среднее количество байт, переданное за сессию: ${avgBytes}</h2>
