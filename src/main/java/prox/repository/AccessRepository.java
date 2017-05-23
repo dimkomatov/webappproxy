@@ -48,8 +48,8 @@ public interface AccessRepository extends JpaRepository<Access, Long> {
   /**Среднее количество передаваемых байт отдельным IP*/
   @Query(nativeQuery = true, value="SELECT remotehost,avg(bytes) FROM access where time between " +
           "coalesce(:date1,'2016-01-01 00:00:01') and coalesce(:date2,'2025-12-12 00:00:01') group by remotehost " +
-          "order by avg(bytes) desc limit :countRhBytes")
-  List<RhBytes> findAvgRhBytes(@Param(value = "countRhBytes")Integer countRhBytes, @Param(value = "date1")Date date1,
+          "order by avg(bytes) desc limit 15")
+  List<RhBytes> findAvgRhBytes(@Param(value = "date1")Date date1,
                                @Param(value = "date2")Date date2);
 
   /**Количество запросов по странам*/
@@ -133,10 +133,10 @@ public interface AccessRepository extends JpaRepository<Access, Long> {
   /**Наиболее часто посещаемые клиентом ресурсы с фильтрацией по методу*/
   @Query(nativeQuery = true, value="SELECT url_0,sum(elapse),count(url_0) FROM access" +
           " where remotehost=coalesce(:rh,'163.172.72.31')" +
-          " and method=coalesce(:method,'GET') and time between" +
+          " and time between" +
           " coalesce(:date1,'2016-01-01 00:00:01') and coalesce(:date2,'2025-12-12 00:00:01')" +
           " group by url_0 order by url_0,sum(elapse) desc limit 5")
-  List<Url2Count> findClientUrlSumEl(@Param(value = "rh")String rh,@Param(value = "method")String method, @Param(value = "date1")Date date1, @Param(value = "date2")Date date2);
+  List<Url2Count> findClientUrlSumEl(@Param(value = "rh")String rh, @Param(value = "date1")Date date1, @Param(value = "date2")Date date2);
 
   /**Статистика по отдельному URL*/
 

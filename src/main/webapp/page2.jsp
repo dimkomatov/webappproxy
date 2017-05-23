@@ -51,18 +51,23 @@
 <div tiles:fragment="content">
   <div class="wrapper_body">
   <div class="cbm_wrap">
-    <h1 class="center">Proxy Server Statistic</h1>
-      <a href="/page">Общая информация</a>
-      <a href="/page1">Статистика использования прокси</a>
-        <a href="/page2">Самые популярные URL</a>
-        <a href="/page3">Самые популярные поисковики</a>
-        <a href="/page4">Среднее время посещения URL</a>
-        <a href="/page5">1</a>
-        <a href="/page6">1</a>
-        <a href="/page7">1</a>
-    <br>
+  <h1 class="center">Proxy Server Statistic</h1>
+  <table  align="center">
+      <tr>
+          <td><a class="butt" role="button" href="/page">Общая информация</a></td>
+          <td><a class="butt" role="button" href="/page1">Статистика использования прокси</a></td>
+          <td><a class="butt" role="button" href="/page2">Самые популярные URL</a></td>
+          <td><a class="butt" role="button" href="/page3">Самые популярные поисковики</a></td>
+      </tr>
+      <tr>
+          <td><a class="butt" role="button" href="/page4">Среднее время посещения URL</a></td>
+          <td><a class="butt" role="button" href="/page5">Статистика по клиенту</a></td>
+          <td><a class="butt" role="button" href="/page6">Статистика по ресурсу</a></td>
+          <td><a class="butt" role="button" href="/page7">Среднее количество передаваемых байт</a></td>
+      </tr>
+  </table>
   <h2>Самые популярные URL по странам/городам</h2>
-  <form name="f00" th:action="@{/page}" method="get">
+  <form name="f00" th:action="@{/page2}" method="get">
   <div id="countryUrlStatistic" class="block1"></div>
   <div id="cityUrlStatistic" class="block2"></div>
   <label for="dateCountryCityUrl1">Время с</label>

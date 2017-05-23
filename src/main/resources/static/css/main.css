@@ -97,3 +97,16 @@
   select {
       width: 300px;
      }
+  .butt {
+       display: block;
+       width: 200px;
+       height: 31px;
+       background: #f7fffe;
+       padding: 8px;
+       text-align: center;
+       border-radius: 5px;
+       border: 1px double black;
+       color: black;
+       font-weight: bold;
+       position: center;
+   }
