@@ -1,7 +1,4 @@
-# Spring Boot Hello World Example with JSP
-
-## Guide
-https://hellokoding.com/spring-boot-hello-world-example-with-jsp/
+# WebAppProxy
 
 ## What you'll need
 - JDK 1.7 or later
@@ -11,5 +8,3 @@ https://hellokoding.com/spring-boot-hello-world-example-with-jsp/
 - Spring Boot
 - Java
 
-## Run
-`mvn spring-boot:run`
