@@ -14,16 +14,16 @@
   <h1 class="center">Proxy Server Statistic</h1>
   <table  align="center">
       <tr>
-          <td><a class="butt" role="button" href="/page">Общая информация</a></td>
-          <td><a class="butt" role="button" href="/page1">Статистика использования прокси</a></td>
-          <td><a class="butt" role="button" href="/page2">Самые популярные URL</a></td>
-          <td><a class="butt" role="button" href="/page3">Самые популярные поисковики</a></td>
+          <td><a class="butt" role="button" href="http://88.151.117.6:54485/WebAppProxy-1.3.5.RELEASE/page">Общая информация</a></td>
+          <td><a class="butt" role="button" href="http://88.151.117.6:54485/WebAppProxy-1.3.5.RELEASE/page1">Статистика использования прокси</a></td>
+          <td><a class="butt" role="button" href="http://88.151.117.6:54485/WebAppProxy-1.3.5.RELEASE/page2">Самые популярные URL</a></td>
+          <td><a class="butt" role="button" href="http://88.151.117.6:54485/WebAppProxy-1.3.5.RELEASE/page3">Самые популярные поисковики</a></td>
       </tr>
       <tr>
-          <td><a class="butt" role="button" href="/page4">Среднее время посещения URL</a></td>
-          <td><a class="butt" role="button" href="/page5">Статистика по клиенту</a></td>
-          <td><a class="butt" role="button" href="/page6">Статистика по ресурсу</a></td>
-          <td><a class="butt" role="button" href="/page7">Среднее количество передаваемых байт</a></td>
+          <td><a class="butt" role="button" href="http://88.151.117.6:54485/WebAppProxy-1.3.5.RELEASE/page4">Среднее время посещения URL</a></td>
+          <td><a class="butt" role="button" href="http://88.151.117.6:54485/WebAppProxy-1.3.5.RELEASE/page5">Статистика по клиенту</a></td>
+          <td><a class="butt" role="button" href="http://88.151.117.6:54485/WebAppProxy-1.3.5.RELEASE/page6">Статистика по ресурсу</a></td>
+          <td><a class="butt" role="button" href="http://88.151.117.6:54485/WebAppProxy-1.3.5.RELEASE/page7">Среднее количество передаваемых байт</a></td>
       </tr>
   </table>
     <h2>Статистика по ресурсу ${urlStatistic}</h2>
