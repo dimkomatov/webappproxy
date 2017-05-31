@@ -170,9 +170,6 @@ public class ProxController {
                           @RequestParam(value = "rhClientStatistic", required = false) String rhClientStatistic) throws ParseException {
 
         /*Client*/
-        model.addAttribute("selectedRhCS", rhClientStatistic);
-        List<String> findAllClients = accessRepository.findAllClients();
-        model.addAttribute("findAllClients", findAllClients);
         model.addAttribute("rhClient", rhClientStatistic);
 
         if (dateClientStatistic1 != null || dateClientStatistic2 != null)

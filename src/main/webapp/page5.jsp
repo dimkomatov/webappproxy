@@ -77,11 +77,7 @@
                </c:if>
                  <br>
              <label for="rhClientStatistic">Клиентский IP</label>
-               <select  id="rhClientStatistic" name="rhClientStatistic">
-                   <c:forEach var="rhCS" items="${findAllClients}">
-                     <option value="${rhCS}" ${rhCS == selectedRhCS ? 'selected="selected"' : ''}>${rhCS}</option>
-                   </c:forEach>
-               </select>
+                 <input type="text" id="rhClientStatistic" name="rhClientStatistic"/>
                  <label for="dateClientStatistic1">Время с</label>
                  <input type="text" id="dateClientStatistic1" name="dateClientStatistic1"/>
                  <label for="dateClientStatistic2">Время по</label>
