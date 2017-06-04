@@ -33,7 +33,7 @@
     <h2>10 последних запросов через Proxy-сервер</h2>
       <input type="text" style="display: none;" id="allStat" name="action" value="cityAndCountry"/>
        <c:if test="${not empty remotehostUrl}">
-            <table bordercolor="black" border="1" align="center">
+            <table bordercolor="black" border="1" align="center" width="750">
               <tr>
                   <td align="center">Клиентский IP</td>
                   <td align="center">URL ресурса</td>
