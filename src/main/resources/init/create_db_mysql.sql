@@ -38,3 +38,9 @@ method VARCHAR(12),
 url VARCHAR(500),
 PRIMARY KEY (id,url)
 );
+
+
+CREATE INDEX remotehost ON access(remotehost);
+CREATE INDEX url_0 ON access(url_0);
+CREATE INDEX time ON access(time);
+CREATE INDEX hierarchy_peerhost_1 ON access(hierarchy_peerhost_1);
