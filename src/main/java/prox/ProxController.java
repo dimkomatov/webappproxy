@@ -29,14 +29,14 @@ public class ProxController {
     Date date1 = null;
     Date date2 = null;
     SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-    FileWriter writer = new FileWriter("/opt/test/page", false);
-    FileWriter writer1 = new FileWriter("/opt/test/page1", false);
-    FileWriter writer2 = new FileWriter("/opt/test/page2", false);
-    FileWriter writer3 = new FileWriter("/opt/test/page3", false);
-    FileWriter writer4 = new FileWriter("/opt/test/page4", false);
-    FileWriter writer5 = new FileWriter("/opt/test/page5", false);
-    FileWriter writer6 = new FileWriter("/opt/test/page6", false);
-    FileWriter writer7 = new FileWriter("/opt/test/page7", false);
+    FileWriter writer = new FileWriter("/opt/scripts/page", false);
+    FileWriter writer1 = new FileWriter("/opt/scripts/page1", false);
+    FileWriter writer2 = new FileWriter("/opt/scripts/page2", false);
+    FileWriter writer3 = new FileWriter("/opt/scripts/page3", false);
+    FileWriter writer4 = new FileWriter("/opt/scripts/page4", false);
+    FileWriter writer5 = new FileWriter("/opt/scripts/page5", false);
+    FileWriter writer6 = new FileWriter("/opt/scripts/page6", false);
+    FileWriter writer7 = new FileWriter("/opt/scripts/page7", false);
 
     public ProxController() throws IOException {
     }
@@ -209,10 +209,10 @@ public class ProxController {
         Integer countAll = accessRepository.countAll();
         String countAllVal = countAll.toString();
 
-        List<String> findAllUrl = accessRepository.findAllUrl();
-        model.addAttribute("findAllUrl", findAllUrl);
+        //List<String> findAllUrl = accessRepository.findAllUrl();
+        //model.addAttribute("findAllUrl", findAllUrl);
 
-        model.addAttribute("selectedUrlAvgEl", coAvgEl);
+       model.addAttribute("coAvgEl", coAvgEl);
 
         if (dateCountryCityAvgEl1 != null || dateCountryCityAvgEl2 != null)
             try {
@@ -311,11 +311,11 @@ public class ProxController {
         Integer countAll = accessRepository.countAll();
         String countAllVal = countAll.toString();
 
-        List<String> findAllUrl = accessRepository.findAllUrl();
-        model.addAttribute("findAllUrl", findAllUrl);
+      //  List<String> findAllUrl = accessRepository.findAllUrl();
+       // model.addAttribute("findAllUrl", findAllUrl);
 
         /*URL*/
-        model.addAttribute("selectedUrl", urlStatistic);
+       // model.addAttribute("selectedUrl", urlStatistic);
         model.addAttribute("urlStatistic", urlStatistic);
 
         if (dateUrlStatistic1 != null || dateUrlStatistic2 != null)

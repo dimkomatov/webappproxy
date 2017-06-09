@@ -17,7 +17,7 @@
                  </c:forEach>
             ]);
             var options = {
-             title: 'Среднее время посещения URL ' + document.getElementById('coAvgEl').value + ' по странам',
+             title: 'Среднее время посещения URL ' + '${coAvgEl}' + ' по странам',
              hAxis: {title: 'Страна'},
              vAxis: {title: 'Среднее время посещения'}
             };
@@ -36,7 +36,7 @@
                    </c:forEach>
               ]);
               var options = {
-               title: 'Среденее время посещения URL ' + document.getElementById('coAvgEl').value  + ' по городам',
+               title: 'Среденее время посещения URL ' + '${coAvgEl}'  + ' по городам',
                hAxis: {title: 'Город'},
                vAxis: {title: 'Среднее время посещения'}
               };
@@ -77,11 +77,7 @@
     <input type="text" style="display: none;" id="cityAndCountryAvgEl" name="action" value="cityAndCountryAvgEl"/>
     <br><br>
     <label for="coAvgEl">URL</label>
-      <select  id="coAvgEl" name="coAvgEl">
-          <c:forEach var="url1" items="${findAllUrl}">
-            <option value="${url1}" ${url1 == selectedUrlAvgEl ? 'selected="selected"' : ''}>${url1}</option>
-          </c:forEach>
-      </select>
+         <input type="text" id="coAvgEl" name="coAvgEl"/>
     <br> <br>
     <div class="form-actions">
         <button type="submit" class="btn">Показать</button>

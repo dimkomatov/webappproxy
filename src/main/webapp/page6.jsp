@@ -66,11 +66,7 @@
                </c:if>
                  <br>
                 <label for="coUrl">URL</label>
-                  <select  id="urlStatistic" name="urlStatistic">
-                      <c:forEach var="url1" items="${findAllUrl}">
-                        <option value="${url1}" ${url1 == selectedUrl ? 'selected="selected"' : ''}>${url1}</option>
-                      </c:forEach>
-                  </select>
+                  <input type="text" id="urlStatistic" name="urlStatistic"/>
                 <br> <br>
                  <label for="dateUrlStatistic1">Время с</label>
                  <input type="text" id="dateUrlStatistic1" name="dateUrlStatistic1"/>
